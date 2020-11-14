@@ -172,7 +172,7 @@ var IssueFilter = /*#__PURE__*/function (_React$Component) {
   _createClass(IssueFilter, [{
     key: "render",
     value: function render() {
-      return /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createElement("div", null, "Spaceholder for the Issue Filter.glub \uD83D\uDC1F");
+      return /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createElement("div", null, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createElement("b", null, "Spaceholder"), " for the Issue Filter.glub \uD83D\uDC1F");
     }
   }]);
 

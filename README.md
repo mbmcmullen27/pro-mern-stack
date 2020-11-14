@@ -190,3 +190,12 @@ From the book:
 the index.html being generated had additional tags, it links to the bundles for you so I removed it from src/index.html (the template) and the result is what we expect now.
 
 In testing confirmed the HMR is working (today's original goal), updates to one file onle recompiles the one, the add api is working again while both servers are running, refreshing both after changes and adding issues they continue to work. Great success.
+> page 131: "its best if you delete the files app.bundle.js so that they don't get served by the 3000 server, and an error will be immediately apparent."
+* So, it looks like the error I was dealing with was in the book and I missed it, but I guess I'm not sure I agree with this.
+* Running compile I kind of get a stable version, that I can run serve from 3000, and compare the changes I'm making on the 8000 server side by side even. 
+A normal workflow might look like:
+1. pull the latest version
+2. compile and run the server on the normal 3000 port
+3. run the dev server on 8000
+4. make changes/updates - updates will be immediately viewable on the 8000 port, but the 3000 will show where you started
+5. save changes and push (we should add the bundles to the git ignore)
