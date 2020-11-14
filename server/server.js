@@ -5,6 +5,8 @@ const Issue = require('./issue.js');
 
 const app = express();
 app.use(express.static('static'));
+app.use(express.static('public'));
+
 app.use(bodyParser.json());
 
 let db;
@@ -47,11 +49,3 @@ app.post ('/api/issues',(req,res)=>{
         res.status(500).json({ message: `Internal Server Error: ${error}` });
     });
 })
-
-
-
-/*
-app.listen(3000, function(){
-    console.log('Glub started on port 3000')
-})
-*/

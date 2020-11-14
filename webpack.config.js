@@ -1,6 +1,10 @@
 const path = require('path');
+const HtmlWebpackPlugin = require('html-webpack-plugin');
+const { CleanWebpackPlugin } = require('clean-webpack-plugin');
 
 module.exports = {
+    mode: 'development',
+    devtool: 'source-map',
     entry: {
         app:'./src/App.jsx',
     },
@@ -13,6 +17,22 @@ module.exports = {
           name: 'vendor',
           chunks: 'all',
         },
+    },
+    plugins: [
+        new CleanWebpackPlugin({ cleanStaleWebpackAssets: false }),
+        new HtmlWebpackPlugin({
+            template: './src/index.html'
+        }),
+      ],
+    devServer: {
+        port: 8000,
+        contentBase: path.resolve(__dirname, 'static'),
+        hot: true,
+        proxy: {
+            '/api/*': {
+                target : 'http://localhost:3000'
+            }
+        }
     },
     module: {
         rules: [
