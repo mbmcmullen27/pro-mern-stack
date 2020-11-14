@@ -185,3 +185,8 @@ From the book:
 
 * okay... seems I can't do both at the same time anymore because both want to recompile and break the running one...
 * I think  I see why he split the ui and api into two servers in the second edition. Probably going to do the same here
+
+### resolved:
+the index.html being generated had additional tags, it links to the bundles for you so I removed it from src/index.html (the template) and the result is what we expect now.
+
+In testing confirmed the HMR is working (today's original goal), updates to one file onle recompiles the one, the add api is working again while both servers are running, refreshing both after changes and adding issues they continue to work. Great success.
