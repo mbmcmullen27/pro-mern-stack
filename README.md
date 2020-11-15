@@ -186,12 +186,12 @@ From the book:
 * okay... seems I can't do both at the same time anymore because both want to recompile and break the running one...
 * I think  I see why he split the ui and api into two servers in the second edition. Probably going to do the same here
 
-### resolved:
+#### resolved:
 the index.html being generated had additional tags, it links to the bundles for you so I removed it from src/index.html (the template) and the result is what we expect now.
 
 In testing confirmed the HMR is working (today's original goal), updates to one file onle recompiles the one, the add api is working again while both servers are running, refreshing both after changes and adding issues they continue to work. Great success.
 > page 131: "its best if you delete the files app.bundle.js so that they don't get served by the 3000 server, and an error will be immediately apparent."
-* So, it looks like the error I was dealing with was in the book and I missed it, but I guess I'm not sure I agree with this.
+* So, it looks like the error I was dealing with was in the book and I misunderstood it, but I guess I'm not sure I agree with this.
 * Running compile I kind of get a stable version, that I can run serve from 3000, and compare the changes I'm making on the 8000 server side by side even. 
 A normal workflow might look like:
 1. pull the latest version
@@ -199,3 +199,27 @@ A normal workflow might look like:
 3. run the dev server on 8000
 4. make changes/updates - updates will be immediately viewable on the 8000 port, but the 3000 will show where you started
 5. save changes and push (we should add the bundles to the git ignore)
+
+### Server-side ES2015
+* I won't be surprised if I need to do less than the book thinks here
+* look into the babel presets we used "es2015" instead of "es2015-node4", and the book references "es2015-node6" for node six. I'm on node v15.1.0 so I figure I'm either using an old version and node is working anyway (not the case: when we try to start from the server file - pre-compile we got errors about the import statement)
+
+Old npm start command with npx:
+> npx nodemon -w server server/server.js
+
+    (node:2666) Warning: To load an ES module, set "type": "module" in the package.json or use the .mjs extension.
+    (Use `node --trace-warnings ...` to show where the warning was created)
+    /home/fishbot/mern-stack/glub/server/server.js:1
+    import 'babel-polyfill';
+    ^^^^^^
+
+    SyntaxError: Cannot use import statement outside a module
+
+* also look more into the require hook, that is syntax I've not seen before
+```javascript
+require('babel-register')({
+    presets: ['es2015']
+});
+
+require('./server.js')
+```
