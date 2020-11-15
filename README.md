@@ -202,7 +202,7 @@ A normal workflow might look like:
 
 ### Server-side ES2015
 * I won't be surprised if I need to do less than the book thinks here
-* look into the babel presets we used "es2015" instead of "es2015-node4", and the book references "es2015-node6" for node six. I'm on node v15.1.0 so I figure I'm either using an old version and node is working anyway (not the case: when we try to start from the server file - pre-compile we got errors about the import statement)
+* look into the babel presets we used "es2015" instead of "es2015-node4", and the book references "es2015-node6" for node six. I'm on node v15.1.0 so I figure I'm either using an old version and this isn't working 'completely' I just don't know what's not supported yet, or this isn't needed anymore and node is just working anyway (not the case: when we try to start from the server file - pre-compile we got errors about the import statement), 
 
 Old npm start command with npx:
 > npx nodemon -w server server/server.js
@@ -223,3 +223,12 @@ require('babel-register')({
 
 require('./server.js')
 ```
+
+### ESlint
+* I may not want linting at all, however we are using books recomended ruleset & extending airbnb config here but removing additional rules 
+
+|Additional Exclusions|Rule Name|Justification|
+|---|---|---|
+|Missing Semicolon|*semi*|better to understand the special cases where it is required than to default to using it all the time|
+|Missing trailing comma|*comma-dangle*|I just think this looks sloppy|
+|Require a curly after an if||We understand how to use the implicit if block and use it on purpose|
