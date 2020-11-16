@@ -16,7 +16,7 @@ app.use(bodyParser.json());
 
 let db;
 MongoClient.connect('mongodb://localhost:27017',{useUnifiedTopology:true},(err,client) =>{
-    if(err) console.log('ERROR', err);
+    if (err) console.log('ERROR', err);
     db = client.db('issuetracker');
     app.listen(3000, () => {
         console.log('Glub started on port 3000')
@@ -37,11 +37,11 @@ app.get('/api/issues', (req,res)=>{
 app.post ('/api/issues',(req,res)=>{
     const newIssue = req.body;
     newIssue.created = new Date();
-    if(!newIssue.status)
+    if (!newIssue.status)
         newIssue.status = 'New';
 
     const err = Issue.validateIssue(newIssue);
-    if(err){
+    if (err){
         res.status(422).json({ message: `Invalid request: ${err}`});
         return;
     }

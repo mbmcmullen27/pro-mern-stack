@@ -6,16 +6,16 @@ module.exports = {
     mode: 'development',
     devtool: 'source-map',
     entry: {
-        app:'./src/App.jsx',
+        app: './src/App.jsx',
     },
-    output:{
+    output: {
         filename: '[name].bundle.js',
         path: path.resolve(__dirname, 'static'),
     },
     optimization: {
         splitChunks: {
-          name: 'vendor',
-          chunks: 'all',
+            name: 'vendor',
+            chunks: 'all',
         },
     },
     plugins: [
@@ -23,14 +23,14 @@ module.exports = {
         new HtmlWebpackPlugin({
             template: './src/index.html'
         }),
-      ],
+    ],
     devServer: {
         port: 8000,
         contentBase: path.resolve(__dirname, 'static'),
         hot: true,
         proxy: {
             '/api/*': {
-                target : 'http://localhost:3000'
+                target: 'http://localhost:3000'
             }
         }
     },
@@ -40,11 +40,11 @@ module.exports = {
                 test: /\.jsx?$/,
                 exclude: /node_modules/,
                 use: {
-                  loader: 'babel-loader',
-                  options: {
-                    presets: ['@babel/preset-env','@babel/preset-react']
-                  }
-                }         
+                    loader: 'babel-loader',
+                    options: {
+                        presets: ['@babel/preset-env', '@babel/preset-react']
+                    }
+                }
             }
         ]
     }
