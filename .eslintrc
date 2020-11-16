@@ -5,6 +5,10 @@
         "no-underscore-dangle": ["error",{"allow":["_id","_metadata"]}],
         "react/jsx-indent" : ["error",4],
         "indent" : ["error",4],
+        "nonblock-statement-body-position" : ["error","below", { "overrides": { "if": "any" } }],
+        "react/destructuring-assignment": ["error", "always", { "ignoreClassFields": true }],
+        "newline-per-chained-call": ["error", { "ignoreChainWithDepth": 2 }],
+        "import/extensions": ["error", "never", { "jsx": "always" }],
         "semi": "off",
         "curly": "off",
         "comma-dangle":"off"

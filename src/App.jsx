@@ -1,10 +1,11 @@
-import IssueList from './IssueList.jsx';
 import React from 'react';
 import ReactDOM from 'react-dom';
 
-const contentNode = document.getElementById('contents');
-ReactDOM.render(<IssueList/>,contentNode);
+import IssueList from './IssueList.jsx';//eslint-disable-line
 
-if (module.hot){
+const contentNode = document.getElementById('contents');
+ReactDOM.render(<IssueList />, contentNode);
+
+if (module.hot) {
     module.hot.accept();
 }

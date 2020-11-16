@@ -231,4 +231,14 @@ require('./server.js')
 |---|---|---|
 |Missing Semicolon|*semi*|better to understand the special cases where it is required than to default to using it all the time|
 |Missing trailing comma|*comma-dangle*|I just think this looks sloppy|
-|Require a curly after an if||We understand how to use the implicit if block and use it on purpose|
+|Require a curly after an if|*nonblock-statement-body-position*|overriding to allow a newline before non-block if statements|
+||*import/extensions*|jsx imports were not resolving when I removed the .jsx extension from the import|
+||*newline-per-chained-call*|this we allowed chains of 2. I like this formatting|
+
+#### Resolving lint errors:
+* added button type "button" to this button. What does the button type do?
+* adding type="button" to the add button in the submit form breaks it 
+```jsx
+<button type="button" onClick={this.createTestIssue}>Glub</button>
+```
+* prop-types -> only found simple examples of this, we have nested objects which are forbidden by another eslint rule. IssueRow holds and Issue object, and IssueTable holds an issue array, not sure how to validate the nested values. We have the server validation for inserting objects so I wouldn't expect anything here to ever be malformed.
