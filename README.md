@@ -237,8 +237,26 @@ require('./server.js')
 
 #### Resolving lint errors:
 * added button type "button" to this button. What does the button type do?
-* adding type="button" to the add button in the submit form breaks it 
+* adding type="button" to the add button in the submit form breaks it - **submit** worked I think there may have been other errors in the way the other day
 ```jsx
 <button type="button" onClick={this.createTestIssue}>Glub</button>
 ```
 * prop-types -> only found simple examples of this, we have nested objects which are forbidden by another eslint rule. IssueRow holds and Issue object, and IssueTable holds an issue array, not sure how to validate the nested values. We have the server validation for inserting objects so I wouldn't expect anything here to ever be malformed.
+
+
+##### 11/17
+* fixed the last two errors, lint returns successfully now (neat)
+
+## Chapter 8: Routing with React Router
+---
+stackoverflow:
+
+    They got rid of individual histories such as browserHistory and hashHistory and instead replaced them with BrowserRouter and HashRouter components respectively in React Router v4:
+
+so we ... 
+> import { HashRouter as Router, Route } from 'react-router-dom';
+
+* in issueEdit we used object for a prop type, maybe this is a new requirement for the airbnb lint config
+
+* editIssue from the book expects the Route component to receive a params prop, which it does its just inside of an object called 'match'
+* also we're still displaying them as components on a single page, book shows the routes as indidviual pages

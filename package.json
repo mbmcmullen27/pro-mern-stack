@@ -27,6 +27,8 @@
     "prop-types": "^15.7.2",
     "react": "^17.0.1",
     "react-dom": "^17.0.1",
+    "react-router": "^5.2.0",
+    "react-router-dom": "^5.2.0",
     "source-map-support": "^0.5.19",
     "whatwg-fetch": "^3.5.0"
   },
