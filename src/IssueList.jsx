@@ -59,14 +59,32 @@ export default class IssueList extends React.Component {
 
         this.createIssue = this.createIssue.bind(this);
         this.createTestIssue = this.createTestIssue.bind(this);
+        this.setFilter = this.setFilter.bind(this);
     }
 
     componentDidMount() {
         this.loadData();
     }
 
+    componentDidUpdate(prevProps) {
+        const { ...props } = this.props;
+        const oldQuery = prevProps.location;
+        const newQuery = props.location;
+        if (oldQuery === newQuery) {
+            console.log({ prevProps })
+            console.log({ props })
+            return;
+        }
+        this.loadData();
+    }
+
+    setFilter(query) {
+        this.props.router.push({ pathname: this.props.location.pathname,query }); //eslint-disable-line
+    }
+
     loadData() {
-        fetch('/api/issues').then((response) => {
+        const { ...props } = this.props;
+        fetch(`/api/issues${props.location.search}`).then((response) => {
             if (response.ok) {
                 response.json().then((data) => {
                     console.log('Total count of records:', data._metadata.total_count); //eslint-disable-line
@@ -128,7 +146,7 @@ export default class IssueList extends React.Component {
         return (
             <div>
                 <h1>Issue Tracker</h1>
-                <IssueFilter />
+                <IssueFilter setFilter={this.setFilter} />
                 <hr />
                 <IssueTable issues={issues} />
                 <button type="button" onClick={this.createTestIssue}>Glub</button>
@@ -137,4 +155,9 @@ export default class IssueList extends React.Component {
             </div>
         )
     }
+}
+
+IssueList.propTypes = {
+    location: PropTypes.object.isRequired, //eslint-disable-line
+    router: PropTypes.object.isRequired //eslint-disable-line
 }

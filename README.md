@@ -260,3 +260,12 @@ so we ...
 
 * editIssue from the book expects the Route component to receive a params prop, which it does its just inside of an object called 'match'
 * also we're still displaying them as components on a single page, book shows the routes as indidviual pages
+
+***fixed:*** Just needed to put the routes into a Switch tag
+
+* filter is not filtering when we call the api, seeing in a few places that hashrouter doesn't support the props.location.[key] api we're using but browser router should
+
+##### 11/21
+* in the [filter](./src/IssueFilter.jsx) we set the search params in the "location" object that we have in the props
+* in the [list](./src/IssueList.jsx) we pulled from the "match" object in the props
+* fixed to both use the location.search field and now the routing is working :thumbsup:

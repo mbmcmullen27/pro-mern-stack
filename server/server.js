@@ -25,7 +25,9 @@ MongoClient.connect('mongodb://localhost:27017', { useUnifiedTopology: true }, (
 })
 
 app.get('/api/issues', (req, res) => {
-    db.collection('issues').find()
+    const filter = {};
+    if (req.query.status) filter.status = req.query.status;
+    db.collection('issues').find(filter)
         .toArray()
         .then((issues) => {
             const metadata = { total_count: issues.length };

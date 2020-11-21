@@ -1,6 +1,7 @@
 import React from 'react';
 import ReactDOM from 'react-dom';
-import { HashRouter as Router, Redirect, Route } from 'react-router-dom';
+import { Route, Switch, withRouter } from 'react-router';
+import { BrowserRouter as Router, Redirect } from 'react-router-dom';
 
 import IssueList from './IssueList.jsx';
 import IssueEdit from './IssueEdit.jsx';
@@ -10,9 +11,11 @@ const NoMatch = () => <p>Page Not Found... glub...</p>;
 const RoutedApp = () => (
     <Router>
         <Redirect from="/" to="/issues" />
-        <Route path="/issues" component={IssueList} />
-        <Route path="/issues/:id" component={IssueEdit} />
-        <Route path="*" component={NoMatch} />
+        <Switch>
+            <Route path="/issues" component={withRouter(IssueList)} />
+            <Route path="/issues/:id"><IssueEdit /></Route>
+            <Route path="*"><NoMatch /></Route>
+        </Switch>
     </Router>
 )
 ReactDOM.render(<RoutedApp />, contentNode);
