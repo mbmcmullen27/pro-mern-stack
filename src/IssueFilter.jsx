@@ -1,7 +1,6 @@
 import React from 'react';
-import { Link } from 'react-router-dom';
 
-export default class IssueFilter extends React.Component { //eslint-disable-line
+export default class IssueFilter extends React.Component {
     constructor() {
         super()
         this.clearFilter = this.clearFilter.bind(this)
@@ -12,13 +11,13 @@ export default class IssueFilter extends React.Component { //eslint-disable-line
     setFilterOpen(e) {
         const { ...props } = this.props;
         e.preventDefault();
-        props.setFilter({ status: 'Open' });
+        props.setFilter({ search: '?status=Open' });
     }
 
     setFilterAssigned(e) {
         const { ...props } = this.props;
         e.preventDefault();
-        props.setFilter({ status: 'Assigned' });
+        props.setFilter({ search: '?status=Assigned' });
     }
 
     clearFilter(e) {
@@ -31,13 +30,11 @@ export default class IssueFilter extends React.Component { //eslint-disable-line
         const Separator = () => <span> 🐟 </span>;
         return (
             <div>
-                <Link to="/issues">All Issues</Link>
+                <a href="#" onClick={this.clearFilter}>All Issues</a>
                 <Separator />
-                <Link to={{ pathname: '/issues', search: '?status=Open' }}>
-                    Open Issues
-                </Link>
+                <a href="#" onClick={this.setFilterOpen}>Open Issues</a>
                 <Separator />
-                <Link to={{ pathname: '/issues', search: '?status=Assigned' }}>Assigned Issues</Link>
+                <a href="#" onClick={this.setFilterAssigned}>Assigned Issues</a>
             </div>
         )
     }

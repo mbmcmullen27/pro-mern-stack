@@ -77,7 +77,9 @@ export default class IssueList extends React.Component {
     }
 
     setFilter(query) {
-        this.props.router.push({ pathname: this.props.location.pathname,query }); //eslint-disable-line
+        const { ...props } = this.props;
+        console.log({ props })
+        this.props.history.push({ pathname: this.props.location.pathname,search: query.search }); //eslint-disable-line
     }
 
     loadData() {
