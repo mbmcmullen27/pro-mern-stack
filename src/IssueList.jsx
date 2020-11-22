@@ -68,11 +68,9 @@ export default class IssueList extends React.Component {
 
     componentDidUpdate(prevProps) {
         const { ...props } = this.props;
-        const oldQuery = prevProps.location;
-        const newQuery = props.location;
+        const oldQuery = prevProps.location.search;
+        const newQuery = props.location.search;
         if (oldQuery === newQuery) {
-            console.log({ prevProps })
-            console.log({ props })
             return;
         }
         this.loadData();

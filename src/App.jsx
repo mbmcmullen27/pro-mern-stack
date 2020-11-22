@@ -1,7 +1,9 @@
 import React from 'react';
 import ReactDOM from 'react-dom';
-import { Route, Switch, withRouter } from 'react-router';
-import { BrowserRouter as Router, Redirect } from 'react-router-dom';
+import {
+    BrowserRouter as Router,
+    Redirect, Route, Switch, withRouter
+} from 'react-router-dom';
 
 import IssueList from './IssueList.jsx';
 import IssueEdit from './IssueEdit.jsx';
@@ -12,8 +14,8 @@ const RoutedApp = () => (
     <Router>
         <Redirect from="/" to="/issues" />
         <Switch>
-            <Route path="/issues" component={withRouter(IssueList)} />
-            <Route path="/issues/:id"><IssueEdit /></Route>
+            <Route exact path="/issues" component={withRouter(IssueList)} />
+            <Route path="/issues/:id" component={IssueEdit} />
             <Route path="*"><NoMatch /></Route>
         </Switch>
     </Router>

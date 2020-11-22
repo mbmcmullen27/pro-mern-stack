@@ -268,4 +268,7 @@ so we ...
 ##### 11/21
 * in the [filter](./src/IssueFilter.jsx) we set the search params in the "location" object that we have in the props
 * in the [list](./src/IssueList.jsx) we pulled from the "match" object in the props
-* fixed to both use the location.search field and now the routing is working :thumbsup:
+* fixed both use the location.search field and now the routing is working :thumbsup:
+
+* now the IssueEdit links in the list rows are not routing to the edit page...
+* this was a route matching thing, making the /issues route have the 'exact' attribute allowed it us to match the other component when we pass parameters
