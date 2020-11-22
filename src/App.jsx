@@ -10,14 +10,31 @@ import IssueEdit from './IssueEdit.jsx';
 
 const contentNode = document.getElementById('contents');
 const NoMatch = () => <p>Page Not Found... glub...</p>;
+
+const App = () => (
+    <div>
+        <div className="header">
+            <h1>Issue Tracker</h1>
+        </div>
+        <div className="contents">
+            <Switch>
+                <Route exact path="/issues" component={withRouter(IssueList)} />
+                <Route path="/issues/:id" component={IssueEdit} />
+                <Route path="*"><NoMatch /></Route>
+            </Switch>
+        </div>
+        <div className="footer">
+            Full source available at
+            <span> </span>
+            <a href="https://github.com/mbmcmullen27/pro-mern-stack">Glub...</a>
+        </div>
+    </div>
+)
+
 const RoutedApp = () => (
     <Router>
         <Redirect from="/" to="/issues" />
-        <Switch>
-            <Route exact path="/issues" component={withRouter(IssueList)} />
-            <Route path="/issues/:id" component={IssueEdit} />
-            <Route path="*"><NoMatch /></Route>
-        </Switch>
+        <Route path="/" component={App} />
     </Router>
 )
 ReactDOM.render(<RoutedApp />, contentNode);

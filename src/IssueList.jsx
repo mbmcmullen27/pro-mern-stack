@@ -77,8 +77,6 @@ export default class IssueList extends React.Component {
     }
 
     setFilter(query) {
-        const { ...props } = this.props;
-        console.log({ props })
         this.props.history.push({ pathname: this.props.location.pathname,search: query.search }); //eslint-disable-line
     }
 
@@ -145,7 +143,6 @@ export default class IssueList extends React.Component {
         const { issues } = this.state;
         return (
             <div>
-                <h1>Issue Tracker</h1>
                 <IssueFilter setFilter={this.setFilter} />
                 <hr />
                 <IssueTable issues={issues} />
@@ -159,5 +156,4 @@ export default class IssueList extends React.Component {
 
 IssueList.propTypes = {
     location: PropTypes.object.isRequired, //eslint-disable-line
-    router: PropTypes.object.isRequired //eslint-disable-line
 }

@@ -30,11 +30,11 @@ export default class IssueFilter extends React.Component {
         const Separator = () => <span> 🐟 </span>;
         return (
             <div>
-                <a href="#" onClick={this.clearFilter}>All Issues</a>
+                <a href="#" onClick={this.clearFilter}>All Issues</a> {/*eslint-disable-line*/}
                 <Separator />
-                <a href="#" onClick={this.setFilterOpen}>Open Issues</a>
+                <a href="#" onClick={this.setFilterOpen}>Open Issues</a> {/*eslint-disable-line*/}
                 <Separator />
-                <a href="#" onClick={this.setFilterAssigned}>Assigned Issues</a>
+                <a href="#" onClick={this.setFilterAssigned}>Assigned Issues</a> {/*eslint-disable-line*/}
             </div>
         )
     }

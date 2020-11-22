@@ -1,5 +1,6 @@
 import 'babel-polyfill';
 import SourceMapSupport from 'source-map-support';
+import path from 'path';
 
 import express from 'express';
 import bodyParser from 'body-parser';
@@ -62,4 +63,8 @@ app.post('/api/issues', (req, res) => {
             console.log(error);
             res.status(500).json({ message: `Internal Server Error: ${error}` });
         });
+})
+
+app.get('*', (req, res) => {
+    res.sendFile(path.resolve('static/index.html'))
 })

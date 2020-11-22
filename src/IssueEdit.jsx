@@ -8,9 +8,11 @@ export default class IssueEdit extends React.Component { //eslint-disable-line
         return (
             <div>
                 SpaceHolder for the space to become the Issue
+                <span> </span>
                 {props.match.params.id}
                 .
-                <Link to="/issues"> back to issue list</Link>
+                <span> </span>
+                <Link to="/issues">back to issue list</Link>
             </div>
         )
     }
