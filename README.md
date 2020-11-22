@@ -263,7 +263,7 @@ so we ...
 
 ***fixed:*** Just needed to put the routes into a Switch tag
 
-* filter is not filtering when we call the api, seeing in a few places that hashrouter doesn't support the props.location.[key] api we're using but browser router should
+* filter is not filtering when we call the api, seeing in a few places that hashrouter doesn't support the props.location.[key] api switching over to **broser router**
 
 ##### 11/21
 * in the [filter](./src/IssueFilter.jsx) we set the search params in the "location" object that we have in the props
@@ -272,3 +272,4 @@ so we ...
 
 * now the IssueEdit links in the list rows are not routing to the edit page...
 * this was a route matching thing, making the /issues route have the 'exact' attribute allowed it us to match the other component when we pass parameters
+
