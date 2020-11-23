@@ -275,3 +275,13 @@ so we ...
 
 ##### 11/22
 * Links are now all working
+
+## Chapter 9: Forms
+---
+* starts the chapter off with the effort example, I never really liked having an arbitrary "effort" field with non descript integer value
+* a better idea might be to have it watch the github repo for commits/contributions and increment based on frequency/volume so effort goes up the more you've worked on it, making it a tracked "effort so far" value instead of an estimated "difficulty" value
+    * Eventually all projects should tie to repos (should they? the point was kind of local todo/issue tracking. Do we want to require internet access? do we already?)
+    * Optional link projects to repos with lazy updates would be most ideal
+        * we want to track abstract ideas that have no code as well 
+        * ^^ these could live as gists, or simple repos that just hold markdown files
+            * why not just as markdown documents sitting in the mongo db?
