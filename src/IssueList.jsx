@@ -82,6 +82,10 @@ export default class IssueList extends React.Component {
 
     loadData() {
         const { ...props } = this.props;
+        const { location } = props
+        const { match } = props
+        console.log({ location })
+        console.log({ match })
         fetch(`/api/issues${props.location.search}`).then((response) => {
             if (response.ok) {
                 response.json().then((data) => {
@@ -141,9 +145,10 @@ export default class IssueList extends React.Component {
 
     render() {
         const { issues } = this.state;
+        const { ...props } = this.props;
         return (
             <div>
-                <IssueFilter setFilter={this.setFilter} />
+                <IssueFilter setFilter={this.setFilter} initFilter={props.location.search} />
                 <hr />
                 <IssueTable issues={issues} />
                 <button type="button" onClick={this.createTestIssue}>Glub</button>

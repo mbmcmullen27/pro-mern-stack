@@ -285,3 +285,8 @@ so we ...
         * we want to track abstract ideas that have no code as well 
         * ^^ these could live as gists, or simple repos that just hold markdown files
             * why not just as markdown documents sitting in the mongo db?
+
+##### 11/24
+
+> componentWillReceiveProps has been renamed
+* stack overflow recomends using static method getDerivedStateFromProps instead, don't call set state, return the new state
