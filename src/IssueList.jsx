@@ -82,10 +82,8 @@ export default class IssueList extends React.Component {
 
     loadData() {
         const { ...props } = this.props;
-        const { location } = props
-        const { match } = props
-        console.log({ location })
-        console.log({ match })
+        // console.log({ location })
+        // console.log({ match })
         fetch(`/api/issues${props.location.search}`).then((response) => {
             if (response.ok) {
                 response.json().then((data) => {
