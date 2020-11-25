@@ -290,3 +290,7 @@ so we ...
 
 > componentWillReceiveProps has been renamed
 * stack overflow recomends using static method getDerivedStateFromProps instead, don't call set state, return the new state
+* none of the added forms/buttons working on the new filter, I think because we're using the query string as a string and the filter builds a query object
+
+##### 11/25
+* yeah it was the getDerivedStateFromProps method, I just removed it since the examples I was finding for forms had neither componentWillReceiveProps or getDerivedState. It works now, this must be something newer versions of react handle on their own (not really sure what case this was supposed to handle...)

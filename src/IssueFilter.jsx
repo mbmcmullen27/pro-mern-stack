@@ -18,15 +18,6 @@ export default class IssueFilter extends React.Component {
         this.clearFilter = this.clearFilter.bind(this)
     }
 
-    static getDerivedStateFromProps(newProps) {
-        return {
-            status: newProps.initFilter.status || '',
-            effort_gte: newProps.initFilter.effort_gte || '',
-            effort_lte: newProps.initFilter.effort_lte || '',
-            changed: false
-        }
-    }
-
     onChangeStatus(e) {
         this.setState({ status: e.target.value, changed: true });
     }
@@ -81,7 +72,7 @@ export default class IssueFilter extends React.Component {
         if (state.status) newFilter.status = `status=${state.status}`;
         if (state.effort_gte) newFilter.effort_gte = `effort_gte=${state.effort_gte}`;
         if (state.effort_lte) newFilter.effort_lte = `effort_lte=${state.effort_lte}`;
-        search = Object.values(newFilter).join('&')
+        search = `?${Object.values(newFilter).join('&')}`
         console.log({ search })
         setFilter({ search })
     }
@@ -103,9 +94,9 @@ export default class IssueFilter extends React.Component {
                 </select>
                 <Separator />
                 &nbsp;Effort between:
-                <input type="text" size={5} value={state.effort_gte} onChange={this.onChangeEffortGte} />
+                <input type="text" size={5} value={this.state.effort_gte} onChange={this.onChangeEffortGte} />
                 &nbsp;-&nbsp;
-                <input type="text" size={5} value={state.effort_lte} onChange={this.onChangeEffortLte} />
+                <input type="text" size={5} value={this.state.effort_lte} onChange={this.onChangeEffortLte} />
                 <Separator />
                 <button onClick={this.applyFilter}>Glub...</button>
                 <button onClick={this.resetFilter} disabled={!state.changed}>Reset</button>
