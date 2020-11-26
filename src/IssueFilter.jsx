@@ -4,18 +4,35 @@ import PropTypes from 'prop-types';
 export default class IssueFilter extends React.Component {
     constructor(props) {
         super(props)
+        console.log({ props })
         this.state = {
-            status: props.initFilter.satus || '',
-            effort_gte: props.initFilter.effort_gte || '',
-            effort_lte: props.initFilter.effort_lte || '',
+            status: props.initFilter.match(/status=(\w+)/) ? props.initFilter.match(/status=(\w+)/)[1] : '',
+            effort_gte: props.initFilter.match(/effort_gte=(\d+)/) ? props.initFilter.match(/effort_gte=(\d+)/)[1] : '',
+            effort_lte: props.initFilter.match(/effort_lte=(\d+)/) ? props.initFilter.match(/effort_lte=(\d+)/)[1] : '',
             changed: false
         }
+
+        console.log(this.state)
         this.onChangeStatus = this.onChangeStatus.bind(this)
         this.onChangeEffortGte = this.onChangeEffortGte.bind(this)
         this.onChangeEffortLte = this.onChangeEffortLte.bind(this)
         this.applyFilter = this.applyFilter.bind(this)
         this.resetFilter = this.resetFilter.bind(this)
         this.clearFilter = this.clearFilter.bind(this)
+    }
+
+    static getDerivedStateFromProps(nextProps, prevState) {
+        console.log({ nextProps })
+        console.log({ prevState })
+        if (nextProps.initFilter !== prevState.initFilter) {
+            return {
+                status: nextProps.initFilter.match(/status=(\w+)/) ? nextProps.initFilter.match(/status=(\w+)/)[1] : '',
+                effort_gte: nextProps.initFilter.match(/effort_gte=(\d+)/) ? nextProps.initFilter.match(/effort_gte=(\d+)/)[1] : '',
+                effort_lte: nextProps.initFilter.match(/effort_lte=(\d+)/) ? nextProps.initFilter.match(/effort_lte=(\d+)/)[1] : '',
+                changed: false
+            }
+        }
+        return null; // Triggers no change in the state
     }
 
     onChangeStatus(e) {
@@ -51,9 +68,9 @@ export default class IssueFilter extends React.Component {
     resetFilter() {
         const { ...props } = this.props;
         this.setState({
-            status: props.initFilter.satus || '',
-            effort_gte: props.initFilter.effort_gte || '',
-            effort_lte: props.initFilter.effort_lte || '',
+            status: props.initFilter.match(/status=(\w+)/) ? props.initFilter.match(/status=(\w+)/)[1] : '',
+            effort_gte: props.initFilter.match(/effort_gte=(\d+)/) ? props.initFilter.match(/effort_gte=(\d+)/)[1] : '',
+            effort_lte: props.initFilter.match(/effort_lte=(\d+)/) ? props.initFilter.match(/effort_lte=(\d+)/)[1] : '',
             changed: false
         })
     }

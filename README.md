@@ -294,3 +294,16 @@ so we ...
 
 ##### 11/25
 * yeah it was the getDerivedStateFromProps method, I just removed it since the examples I was finding for forms had neither componentWillReceiveProps or getDerivedState. It works now, this must be something newer versions of react handle on their own (not really sure what case this was supposed to handle...)
+
+* I can't navigate to a specific filter when typing in query params to the address bar however
+* again I think this has something to do with the way I pass the search object/string to the filter. 
+* yeah I think I need to split the initfilter out into the fields expected in the issuefilter contstructor
+    * could probably regex /status=(.*)&/
+
+##### 11/26
+* tried some goofiness with the string to regex the value and it worked, but still not routing properly when navigating via address, this is what withRouter was supposed to accomplish for us. Need to confirm the behavior of withRouter and push
+* its extracting the fields from the string correctly but it seems like the constructor for the filter is getting called twice, once correctly and then resetting itself... is this because of the 404 redirect logic?
+* I think its because setFilter doesn't get called until you press glub, I think the willReceiveProps method we removed might have been in place to handle this, pretty confident we need another lifecycle method to take its place 
+
+> getDerivedStateFromProps
+    looking at this one again, another thing that assumes init filter is an object, gives "nextProps" and "prevState" state holds an object, props will have a query string, so we'll need to parse again to compare. I don't like all the parsing going on now and I kind of think we should start using just a string and extract on the render instead of extract everywhere and only use the object on render...
