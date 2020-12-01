@@ -307,3 +307,7 @@ so we ...
 
 > getDerivedStateFromProps
     looking at this one again, another thing that assumes init filter is an object, gives "nextProps" and "prevState" state holds an object, props will have a query string, so we'll need to parse again to compare. I don't like all the parsing going on now and I kind of think we should start using just a string and extract on the render instead of extract everywhere and only use the object on render...
+
+* its the async load data call in issueList I think, we are fetching the right amount of records when we go to an address with a filter, and setting the state properly but we reload an empty filter and then get Warning: Can't perform a React state update on an unmounted component 
+    * how could that be? we don't call load data until we are inside componentDidMount?
+* not sure why the issueFilter constructor is called twice
