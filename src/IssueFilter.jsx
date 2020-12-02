@@ -22,17 +22,6 @@ export default class IssueFilter extends React.Component {
         this.clearFilter = this.clearFilter.bind(this)
     }
 
-    componentDidUpdate(nextProps) {
-        console.log({ nextProps })
-        return {
-            status: nextProps.initFilter.match(/status=(\w+)/) ? nextProps.initFilter.match(/status=(\w+)/)[1] : '',
-            effort_gte: nextProps.initFilter.match(/effort_gte=(\d+)/) ? nextProps.initFilter.match(/effort_gte=(\d+)/)[1] : '',
-            effort_lte: nextProps.initFilter.match(/effort_lte=(\d+)/) ? nextProps.initFilter.match(/effort_lte=(\d+)/)[1] : '',
-            changed: false
-        }
-        // Triggers no change in the state
-    }
-
     onChangeStatus(e) {
         this.setState({ status: e.target.value, changed: true });
     }

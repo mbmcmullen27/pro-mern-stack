@@ -1,5 +1,5 @@
 import React from 'react';
-import { Link } from 'react-router-dom';
+import { Link, useLocation } from 'react-router-dom';
 import 'whatwg-fetch';
 import PropTypes from 'prop-types';
 
@@ -63,10 +63,12 @@ export default class IssueList extends React.Component {
     }
 
     componentDidMount() {
+        console.log('component did mount...')
         this.loadData();
     }
 
     componentDidUpdate(prevProps) {
+        console.log('component did update...')
         const { ...props } = this.props;
         const oldQuery = prevProps.location.search;
         const newQuery = props.location.search;
@@ -149,6 +151,7 @@ export default class IssueList extends React.Component {
     render() {
         const { issues } = this.state;
         const { ...props } = this.props;
+        console.log(JSON.stringify(props.location.search))
         return (
             <div>
                 <IssueFilter setFilter={this.setFilter} initFilter={props.location.search} />

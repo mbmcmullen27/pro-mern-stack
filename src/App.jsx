@@ -34,7 +34,7 @@ const App = () => (
 const RoutedApp = () => (
     <Router>
         <Redirect from="/" to="/issues" />
-        <Route path="/" component={App} />
+        <Route path="/" component={withRouter(App)} />
     </Router>
 )
 ReactDOM.render(<RoutedApp />, contentNode);

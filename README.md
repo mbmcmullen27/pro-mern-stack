@@ -311,3 +311,50 @@ so we ...
 * its the async load data call in issueList I think, we are fetching the right amount of records when we go to an address with a filter, and setting the state properly but we reload an empty filter and then get Warning: Can't perform a React state update on an unmounted component 
     * how could that be? we don't call load data until we are inside componentDidMount?
 * not sure why the issueFilter constructor is called twice
+
+* removing get derived state seems to work exactly the same...
+```jsx
+   static getDerivedStateFromProps(nextProps, prevState) {
+        console.log({ nextProps })
+        console.log({ prevState })
+        return {
+            status: nextProps.initFilter.match(/status=(\w+)/) ? nextProps.initFilter.match(/status=(\w+)/)[1] : '',
+            effort_gte: nextProps.initFilter.match(/effort_gte=(\d+)/) ? nextProps.initFilter.match(/effort_gte=(\d+)/)[1] : '',
+            effort_lte: nextProps.initFilter.match(/effort_lte=(\d+)/) ? nextProps.initFilter.match(/effort_lte=(\d+)/)[1] : '',
+            changed: false
+        }
+    }
+```
+very confusing
+1. the location fetches the query string correctly 
+2. a filter is created with the right parameters 
+3. filterList calls componentDidMount
+4. a new blank filter is created
+5. filterList calls componentDidMount again
+6. filterList loadData returns with the correct data from didMount
+7. Error that we can't update an unmounted component
+8. filterList loadData returns again with defaut data from didMount
+
+
+Console:
+
+    "?status=Open&effort_gte=1&effort_lte=10"
+    IssueFilter.jsx:7 constructor, received props:
+    IssueFilter.jsx:8 {props: {…}}
+    IssueFilter.jsx:15 constructor, after set state:
+    IssueFilter.jsx:16 {status: "Open", effort_gte: "1", effort_lte: "10", changed: false}
+    IssueList.jsx:66 component did mount...
+    IssueList.jsx:154 ""
+    IssueFilter.jsx:7 constructor, received props:
+    IssueFilter.jsx:8 {props: {…}}
+    IssueFilter.jsx:15 constructor, after set state:
+    IssueFilter.jsx:16 {status: "", effort_gte: "", effort_lte: "", changed: false}
+    IssueList.jsx:66 component did mount...
+    log.js:24 [HMR] Waiting for update signal from WDS...
+    IssueList.jsx:97 Total count of records: 1
+    react-dom.development.js:67 Warning: Can't perform a React state update on an unmounted component. This is a no-op, but it indicates a memory leak in your application. To fix, cancel all subscriptions and asynchronous tasks in the componentWillUnmount method.
+    at IssueList (http://localhost:8000/app.bundle.js:556:5)
+    at withRouter(IssueList) (http://localhost:8000/vendor.bundle.js:31602:37)
+    Total count of records: 4
+
+> why does the good object get unmounted before the good data comes in? I suspect this is caused by the redirect/fallback behavior where anything route that's not exactly "/issue" redirects to /issue that we lose the location provided in the address bar...
