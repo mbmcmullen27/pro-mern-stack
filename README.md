@@ -358,3 +358,29 @@ Console:
     Total count of records: 4
 
 > why does the good object get unmounted before the good data comes in? I suspect this is caused by the redirect/fallback behavior where anything route that's not exactly "/issue" redirects to /issue that we lose the location provided in the address bar...
+
+okay I think I'm starting to understand:
+* I read that when a component has a child component that has props assigned it can trigger a remount for the parent
+* so we're 
+    * initial render
+    * first didMount()
+        * fetching the issues...
+    * assign the filter prop to the child
+    * remount everything
+    * issues return 
+
+
+##### 12/03 Resolution
+* react router v4 does not preserve query strings in addresses, they need to be explicited forwarded
+```jsx
+const RoutedApp = () => (
+    <Router>
+        <Redirect from="/" to={{ ...location, pathname: '/issues' }} />
+        <Route path="/" component={withRouter(App)} />
+    </Router>
+)
+```
+* I think this means I should fix the string manipulation stuff I was doing to use the location object now, but at least the addresses are resolving to the right filter.
+* the 'memory leak' error persists, but I think we know why that is now
+* going directly to / instead of /issues (no redirect) doesn't give the error
+* we are mounting fetching, redirecting, and fetching again

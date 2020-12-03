@@ -70,6 +70,7 @@ export default class IssueList extends React.Component {
     componentDidUpdate(prevProps) {
         console.log('component did update...')
         const { ...props } = this.props;
+        console.log(`search: ${prevProps.location.search}`)
         const oldQuery = prevProps.location.search;
         const newQuery = props.location.search;
         if (oldQuery === newQuery) {
@@ -79,12 +80,7 @@ export default class IssueList extends React.Component {
     }
 
     setFilter(query) {
-        const { history } = this.props;
-        console.log('before push history: ');
-        console.log({ history });
         this.props.history.push({ pathname: this.props.location.pathname, search: query.search }); //eslint-disable-line
-        console.log('after push history: ');
-        console.log({ history });
     }
 
     loadData() {
@@ -151,7 +147,6 @@ export default class IssueList extends React.Component {
     render() {
         const { issues } = this.state;
         const { ...props } = this.props;
-        console.log(JSON.stringify(props.location.search))
         return (
             <div>
                 <IssueFilter setFilter={this.setFilter} initFilter={props.location.search} />
