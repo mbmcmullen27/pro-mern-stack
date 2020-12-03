@@ -4,16 +4,12 @@ import PropTypes from 'prop-types';
 export default class IssueFilter extends React.Component {
     constructor(props) {
         super(props)
-        console.log('constructor, received props:')
-        console.log({ props })
         this.state = {
             status: props.initFilter.match(/status=(\w+)/) ? props.initFilter.match(/status=(\w+)/)[1] : '',
             effort_gte: props.initFilter.match(/effort_gte=(\d+)/) ? props.initFilter.match(/effort_gte=(\d+)/)[1] : '',
             effort_lte: props.initFilter.match(/effort_lte=(\d+)/) ? props.initFilter.match(/effort_lte=(\d+)/)[1] : '',
             changed: false
         }
-        console.log('constructor, after set state:')
-        console.log(this.state)
         this.onChangeStatus = this.onChangeStatus.bind(this)
         this.onChangeEffortGte = this.onChangeEffortGte.bind(this)
         this.onChangeEffortLte = this.onChangeEffortLte.bind(this)
