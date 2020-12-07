@@ -33,7 +33,7 @@ const App = () => (
 
 const RoutedApp = () => (
     <Router>
-        <Redirect from="/" to={{ ...location, pathname: '/issues' }} />
+        <Redirect from="/" to={{ ...location, pathname: '/issues' }} /> {/*eslint-disable-line*/}
         <Route path="/" component={App} />
     </Router>
 )

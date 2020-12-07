@@ -231,9 +231,10 @@ require('./server.js')
 |---|---|---|
 |Missing Semicolon|*semi*|better to understand the special cases where it is required than to default to using it all the time|
 |Missing trailing comma|*comma-dangle*|I just think this looks sloppy|
-|Require a curly after an if|*nonblock-statement-body-position*|overriding to allow a newline before non-block if statements|
+|Require a curly after an if/else|*nonblock-statement-body-position*|overriding to allow a newline before non-block if statements|
 ||*import/extensions*|jsx imports were not resolving when I removed the .jsx extension from the import|
 ||*newline-per-chained-call*|this we allowed chains of 2. I like this formatting|
+|one expression per line|"react/jsx-one-expression-per-line"|made for *really* ugly code in issue Edit do not like this {' '}|
 
 #### Resolving lint errors:
 * added button type "button" to this button. What does the button type do?
