@@ -12,7 +12,8 @@
         "semi": "off",
         "curly": "off",
         "comma-dangle":"off",
-        "react/jsx-one-expression-per-line":"off"
+        "react/jsx-one-expression-per-line":"off",
+        "react/jsx-indent-props":[2,4]
         
     }
 }

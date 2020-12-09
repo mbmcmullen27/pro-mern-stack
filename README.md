@@ -235,6 +235,7 @@ require('./server.js')
 ||*import/extensions*|jsx imports were not resolving when I removed the .jsx extension from the import|
 ||*newline-per-chained-call*|this we allowed chains of 2. I like this formatting|
 |one expression per line|"react/jsx-one-expression-per-line"|made for *really* ugly code in issue Edit do not like this {' '}|
+|jsx indent props|react/jsx-indent-props|two space rule was conflicting with the eslint(indent) rule|
 
 #### Resolving lint errors:
 * added button type "button" to this button. What does the button type do?
