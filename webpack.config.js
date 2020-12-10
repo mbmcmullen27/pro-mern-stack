@@ -26,6 +26,7 @@ module.exports = {
     ],
     devServer: {
         port: 8000,
+        publicPath: '/',
         contentBase: path.resolve(__dirname, 'static'),
         hot: true,
         historyApiFallback: true,

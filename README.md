@@ -386,3 +386,20 @@ const RoutedApp = () => (
 * the 'memory leak' error persists, but I think we know why that is now
 * going directly to / instead of /issues (no redirect) doesn't give the error
 * we are mounting fetching, redirecting, and fetching again
+
+##### 12/10/20 edit page/update api
+* update api working correctly
+* unable to navigate directly to an issue by address with its Id, and unable to refresh the page successfully when we are there
+* I suspect this will take some messing with the router, not sure if the book plans to address this 
+    * the link inside the table elements works, I feel like this is again an issue with the redirecting/nested routes
+    * our router configuration is significantly different than the books
+        * redirect no longer preserves query params by default
+        * nested routes are no longer supported
+```jsx
+<Link to={`/issues/${issue._id}`}>
+    {issue._id.substr(-4)}
+</Link>
+```
+
+* added "publicPath" to webpack config because I noticed when we start the dev server we were getting a message "webpack output is served from Undefined"
+    * not entirely sure what the consequence of this is
