@@ -26,9 +26,9 @@ module.exports = {
     ],
     devServer: {
         port: 8000,
-        publicPath: '/',
         contentBase: path.resolve(__dirname, 'static'),
         hot: true,
+        inline: true,
         historyApiFallback: true,
         proxy: {
             '/api/*': {

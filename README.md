@@ -403,3 +403,12 @@ const RoutedApp = () => (
 
 * added "publicPath" to webpack config because I noticed when we start the dev server we were getting a message "webpack output is served from Undefined"
     * not entirely sure what the consequence of this is
+
+##### 12/11/20
+* this has to be a result of the redirect, we're preserving the query sting but not the path apparently
+    * we can navigate to the page with buttons, but refresh or navigating by address breaks it
+
+Adding a 'base' tag to the index template fixed the 404's but we still aren't preserving the id param, and navigating by address doesn't work for the edit page
+```html
+  <base href="http://localhost:8000/">
+```

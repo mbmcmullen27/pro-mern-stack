@@ -19,7 +19,7 @@ const App = () => (
         <div className="contents">
             <Switch>
                 <Route exact path="/issues" component={withRouter(IssueList)} />
-                <Route exact path="/issues/:id" component={IssueEdit} />
+                <Route path="/issues/:id" component={withRouter(IssueEdit)} />
                 <Route path="*"><NoMatch /></Route>
             </Switch>
         </div>
