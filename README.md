@@ -412,3 +412,10 @@ Adding a 'base' tag to the index template fixed the 404's but we still aren't pr
 ```html
   <base href="http://localhost:8000/">
 ```
+
+##### 12/12/20
+* Resolved:
+    * instead of the routed app being a component that only does a redirect to the 'app' component, we now have the app component as a "layout" it doesn't do any routing on its own it just renders the header and footer
+    * then the routedApp component passes the router switch as children to the layout
+        * this works nicely and also solved my double rending/memory leak problem from above
+        * I think I could revert these changes and fix the other problem now, but I like this structure better. I think the problem was when we were redirecting even when a valid path was given, we needed to do the redirect after the switching not before, and we had the app component along side the redirect so we were rendering it before and after redirecting.
