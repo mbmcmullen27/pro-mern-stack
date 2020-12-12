@@ -419,3 +419,28 @@ Adding a 'base' tag to the index template fixed the 404's but we still aren't pr
     * then the routedApp component passes the router switch as children to the layout
         * this works nicely and also solved my double rending/memory leak problem from above
         * I think I could revert these changes and fix the other problem now, but I like this structure better. I think the problem was when we were redirecting even when a valid path was given, we needed to do the redirect after the switching not before, and we had the app component along side the redirect so we were rendering it before and after redirecting.
+
+##### Update api
+
+Need to look at the mechanics of the invalidFields thing again, we load the name of the field holding an invalid value and add it to the state? then block updates if there are any named names? I think?
+```jsx
+if (Object.keys(state.invalidFields).length !== 0) {
+            return;
+}
+```
+
+* update api is working from the edit page but it's not updating the completion date.
+* I'm thinking it's probably an issue with DateInput, because effort is updating correctly so we are sending a request to the endpoint that the server is updating the database with, it just includes a completion date of null even though the component is validating the string properly
+    * guarantee this is something stupid 
+
+```json
+{"_id":"5fb9a3635e042a057d4edbf6","status":"New","owner":"finchboat","created":"2020-11-21T23:31:47.024Z","title":"your TV has no COMPUTE, plz insert computer","completionDate":null,"effort":"37"}
+```
+**idea** : vscode extension for formatting code snippets inside ``` blocks in markdown files
+
+* Actually forgot these two lines that actually update the state after validating... so we were validating but not updating... I knew it was something stupid. Update api is working now.
+
+```javascript
+    this.setState({ focused: false, valid });
+    if (valid) props.onChange(e, value);
+```

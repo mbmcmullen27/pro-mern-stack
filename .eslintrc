@@ -7,7 +7,7 @@
         "indent" : ["error",4],
         "nonblock-statement-body-position" : ["error","below", { "overrides": { "if": "any", "else": "any" }}],
         "react/destructuring-assignment": ["error", "always", { "ignoreClassFields": true }],
-        "newline-per-chained-call": ["error", { "ignoreChainWithDepth": 2 }],
+        "newline-per-chained-call": ["error", { "ignoreChainWithDepth": 3 }],
         "import/extensions": ["error", "never", { "jsx": "always" }],
         "semi": "off",
         "curly": "off",

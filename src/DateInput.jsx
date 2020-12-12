@@ -17,7 +17,7 @@ export default class DateInput extends React.Component {
 
     constructor(props) {
         super(props);
-        this.sate = { value: DateInput.editFormat(props.value), focused: false, valid: true };
+        this.state = { value: DateInput.editFormat(props.value), focused: false, valid: true };
         this.onFocus = this.onFocus.bind(this)
         this.onBlur = this.onBlur.bind(this)
         this.onChange = this.onChange.bind(this)
@@ -35,6 +35,8 @@ export default class DateInput extends React.Component {
         if (valid !== state.valid && props.onValidityChange) {
             props.onValidityChange(e, value);
         }
+        this.setState({ focused: false, valid });
+        if (valid) props.onChange(e, value);
     }
 
     onChange(e) {
