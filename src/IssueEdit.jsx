@@ -41,13 +41,10 @@ export default class IssueEdit extends React.Component {
 
         const { ...state } = this.state;
         const { ...props } = this.props;
-        const { issue } = this.state;
 
         if (Object.keys(state.invalidFields).length !== 0) {
             return;
         }
-        console.log('submit')
-        // console.log({ issue })
         fetch(`/api/issues/${props.match.params.id}`, {
             method: 'PUT',
             headers: { 'Content-Type': 'application/json' },
@@ -60,7 +57,6 @@ export default class IssueEdit extends React.Component {
                         updatedIssue.completionDate = new Date(updatedIssue.completionDate);
                     }
                     this.setState({ issue: updatedIssue })
-                    console.log({ issue })
                     alert('Updated issue successfully.')
                 })
             } else {
