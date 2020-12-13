@@ -2,6 +2,8 @@ import React from 'react';
 import ReactDOM from 'react-dom';
 import PropTypes from 'prop-types';
 
+import 'bootstrap/dist/css/bootstrap.min.css';
+
 import {
     BrowserRouter as Router,
     Redirect, Route, Switch, withRouter
@@ -16,7 +18,7 @@ const NoMatch = () => <p>Page Not Found... glub...</p>;
 function App(props) {
     const { children } = props;
     return (
-        <div>
+        <div className="container-fluid">
             <div className="header">
                 <h1>Issue Tracker</h1>
             </div>

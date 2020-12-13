@@ -1,8 +1,8 @@
 import React from 'react';
 import { Link } from 'react-router-dom';
+import { Button } from 'react-bootstrap';
 import 'whatwg-fetch';
 import PropTypes from 'prop-types';
-
 import IssueAdd from './IssueAdd.jsx'
 import IssueFilter from './IssueFilter.jsx'
 
@@ -25,7 +25,7 @@ const IssueRow = (props) => {
             <td>{issue.effort}</td>
             <td>{issue.completionDate ? issue.completionDate.toDateString() : ''}</td>
             <td>{issue.title}</td>
-            <td><button type="button" onClick={onDeleteClick}>Delete</button></td>
+            <td><Button size="xsmall" onClick={onDeleteClick}><i className="fa fa-bomb" aria-hidden="true" /></Button></td>
         </tr>
     )
 }

@@ -444,3 +444,18 @@ if (Object.keys(state.invalidFields).length !== 0) {
     this.setState({ focused: false, valid });
     if (valid) props.onChange(e, value);
 ```
+
+## Chapter 10: React-Bootstrap
+
+* right away problems with webpack, because we are using an index template and clearing the file, the bootstrap link is getting removed... 
+    * instead of the linking method used in the book we will need the webpack style and css loaders to include the Bootstrap stylesheet
+* Bootstrap dropped Glyphicon support in V4 [bootstrap migration](https://getbootstrap.com/docs/4.0/migration/#components)
+    
+    Dropped the Glyphicons icon font. If you need icons, some options are:
+    the upstream version of Glyphicons
+    Octicons
+    Font Awesome
+    See the Extend page for a list of alternatives. Have additional suggestions? Please open an issue or PR.
+
+* switched index to point to font awesome for icons, made delete button a little bomb 
+* style was working, the import from index needed to be removed since we imported in app.jsx instead
