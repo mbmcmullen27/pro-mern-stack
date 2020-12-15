@@ -459,3 +459,27 @@ if (Object.keys(state.invalidFields).length !== 0) {
 
 * switched index to point to font awesome for icons, made delete button a little bomb 
 * style was working, the import from index needed to be removed since we imported in app.jsx instead
+
+##### 12/15/20
+
+* book mentions adding react-router-bootstrap to the entry object in webpack config to include it in the vendor bundle, but I think the "split chunks" optimization handles this... should look into it some more 
+> vendor: ['react', 'react-dom', 'react-router', 'react-bootstrap', 'react-router-bootstrap']
+
+* there are a number of places where he's only including these as dev dependencies. This hasn't worked for me I wonder if I'm including a bunch of extra modules I don't need for the production build?
+
+> export 'MenuItem' (imported as 'MenuItem') was not found in 'react-bootstrap'
+
+using this instead : 
+```jsx
+    <Dropdown.Item>
+```
+
+Doesn't seem to recognize Header either...
+```jsx
+<Navbar.Header>
+```
+
+pullRight becomes 
+```jsx
+<Nav className="ml-auto">
+```

@@ -1,5 +1,9 @@
 import React from 'react';
 import ReactDOM from 'react-dom';
+import { LinkContainer } from 'react-router-bootstrap';
+import {
+    Navbar, Nav, NavItem, NavDropdown
+} from 'react-bootstrap';
 import PropTypes from 'prop-types';
 
 import 'bootstrap/dist/css/bootstrap.min.css';
@@ -15,20 +19,42 @@ import IssueEdit from './IssueEdit.jsx';
 const contentNode = document.getElementById('contents');
 const NoMatch = () => <p>Page Not Found... glub...</p>;
 
+const Header = () => (
+    <Navbar fluid="true">
+        <Navbar.Brand>Issue Tracker</Navbar.Brand>
+        <Nav justify variant="pills">
+            <LinkContainer to="/issues">
+                <Nav.Item>Issues</Nav.Item>
+            </LinkContainer>
+            <NavDropdown.Divider />
+            <LinkContainer to="/reports">
+                <Nav.Item>Reports</Nav.Item>
+            </LinkContainer>
+            <NavDropdown.Divider />
+        </Nav>
+        <Nav className="ml-auto">
+            <Nav.Item><i className="fa fa-bomb" aria-hidden="true" /> Create Issue</Nav.Item>
+            <NavDropdown id="user-dropdown" title="logout">
+                <NavDropdown.Item>Logout</NavDropdown.Item>
+            </NavDropdown>
+        </Nav>
+    </Navbar>
+)
+
 function App(props) {
     const { children } = props;
     return (
-        <div className="container-fluid">
-            <div className="header">
-                <h1>Issue Tracker</h1>
-            </div>
-            <div className="contents">
+        <div>
+            <Header />
+            <div className="container-fluid">
                 {children}
-            </div>
-            <div className="footer">
-                Full source available at
-                <span> </span>
-                <a href="https://github.com/mbmcmullen27/pro-mern-stack">Glub...</a>
+                <hr />
+                <h5>
+                    <small>
+                        Full source available at
+                        <a href="https://github.com/mbmcmullen27/pro-mern-stack">Glub...</a>
+                    </small>
+                </h5>
             </div>
         </div>
     )
