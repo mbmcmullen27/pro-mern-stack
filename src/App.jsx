@@ -1,8 +1,7 @@
 import React from 'react';
 import ReactDOM from 'react-dom';
-import { LinkContainer } from 'react-router-bootstrap';
 import {
-    Navbar, Nav, NavItem, NavDropdown
+    Navbar, Nav, NavDropdown,
 } from 'react-bootstrap';
 import PropTypes from 'prop-types';
 
@@ -20,21 +19,15 @@ const contentNode = document.getElementById('contents');
 const NoMatch = () => <p>Page Not Found... glub...</p>;
 
 const Header = () => (
-    <Navbar fluid="true">
+    <Navbar className="container-fluid">
         <Navbar.Brand>Issue Tracker</Navbar.Brand>
-        <Nav justify variant="pills">
-            <LinkContainer to="/issues">
-                <Nav.Item>Issues</Nav.Item>
-            </LinkContainer>
-            <NavDropdown.Divider />
-            <LinkContainer to="/reports">
-                <Nav.Item>Reports</Nav.Item>
-            </LinkContainer>
-            <NavDropdown.Divider />
+        <Nav className="mr-auto">
+            <Nav.Link href="/issues">Issues</Nav.Link>
+            <Nav.Link href="/reports">Reports</Nav.Link>
         </Nav>
         <Nav className="ml-auto">
-            <Nav.Item><i className="fa fa-bomb" aria-hidden="true" /> Create Issue</Nav.Item>
-            <NavDropdown id="user-dropdown" title="logout">
+            <Nav.Link><i className="fa fa-plus" aria-hidden="true" /> Create Issue</Nav.Link>
+            <NavDropdown id="user-dropdown" title={<i className="fa fa-ellipsis-h" aria-hidden="true" />}>
                 <NavDropdown.Item>Logout</NavDropdown.Item>
             </NavDropdown>
         </Nav>
@@ -46,6 +39,7 @@ function App(props) {
     return (
         <div>
             <Header />
+            <hr />
             <div className="container-fluid">
                 {children}
                 <hr />

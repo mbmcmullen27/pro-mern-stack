@@ -471,7 +471,7 @@ if (Object.keys(state.invalidFields).length !== 0) {
 
 using this instead : 
 ```jsx
-    <Dropdown.Item>
+<Dropdown.Item>
 ```
 
 Doesn't seem to recognize Header either...
@@ -483,3 +483,9 @@ pullRight becomes
 ```jsx
 <Nav className="ml-auto">
 ```
+
+##### 12/16/20
+
+* Link containers needed to be removed and Nav.Items changed to Nav.links with hrefs
+    * noCaret is removed because it's not optional with the styles anymore - see index.html for #user-dropdown style
+    * Book exercices say not to do this because link container will also show what link is active
