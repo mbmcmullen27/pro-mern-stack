@@ -1,5 +1,8 @@
 import React from 'react';
 import PropTypes from 'prop-types';
+import {
+    Col, Row, FormGroup, FormControl, FormLabel, InputGroup, ButtonToolbar, Button
+} from 'react-bootstrap';
 
 export default class IssueFilter extends React.Component {
     constructor(props) {
@@ -66,30 +69,54 @@ export default class IssueFilter extends React.Component {
     }
 
     render() {
-        const Separator = () => <span> 🐟 </span>;
         const { ...state } = this.state;
         return (
-            <div>
-                Status:
-                <select value={state.status} onChange={this.onChangeStatus}>
-                    <option value="">(Any)</option>
-                    <option value="New">New</option>
-                    <option value="Open">Open</option>
-                    <option value="Assigned">Assigned</option>
-                    <option value="Fixed">Fixed</option>
-                    <option value="Verified">Verified</option>
-                    <option value="Closed">Closed</option>
-                </select>
-                <Separator />
-                &nbsp;Effort between:
-                <input type="text" size={5} value={state.effort_gte} onChange={this.onChangeEffortGte} />
-                &nbsp;-&nbsp;
-                <input type="text" size={5} value={state.effort_lte} onChange={this.onChangeEffortLte} />
-                <Separator />
-                <button type="submit" onClick={this.applyFilter}>Glub...</button>
-                <button type="button" onClick={this.resetFilter} disabled={!state.changed}>Reset</button>
-                <button type="button" onClick={this.clearFilter}>Clear</button>
-            </div>
+            <Row>
+                <Col xs={6} sm={4} md={3} lg={2}>
+                    <FormGroup>
+                        <FormLabel>Status</FormLabel>
+                        <FormControl
+                            as="select"
+                            value={state.status}
+                            onChange={this.onChangeStatus}
+                        >
+                            <option value="">(Any)</option>
+                            <option value="New">New</option>
+                            <option value="Open">Open</option>
+                            <option value="Assigned">Assigned</option>
+                            <option value="Fixed">Fixed</option>
+                            <option value="Verified">Verified</option>
+                            <option value="Closed">Closed</option>
+                        </FormControl>
+                    </FormGroup>
+                </Col>
+                <Col xs={6} sm={4} md={3} lg={2}>
+                    <FormGroup>
+                        <FormLabel>Effort</FormLabel>
+                        <InputGroup>
+                            <FormControl
+                                value={state.effort_gte}
+                                onChange={this.onChangeEffortGte}
+                            />
+                            <InputGroup.Append>-</InputGroup.Append>
+                            <FormControl
+                                value={state.effort_lte}
+                                onChange={this.onChangeEffortLte}
+                            />
+                        </InputGroup>
+                    </FormGroup>
+                </Col>
+                <Col xs={6} sm={4} md={3} lg={2}>
+                    <FormGroup>
+                        <FormLabel>&nbsp;</FormLabel>
+                        <ButtonToolbar>
+                            <Button bsStyle="primary" onClick={this.applyFilter}>Glub</Button>
+                            <Button onClick={this.resetFilter}>Reset</Button>
+                            <Button onClick={this.clearFilter}>Clear</Button>
+                        </ButtonToolbar>
+                    </FormGroup>
+                </Col>
+            </Row>
         )
     }
 }

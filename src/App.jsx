@@ -4,6 +4,7 @@ import {
     Navbar, Nav, NavDropdown,
 } from 'react-bootstrap';
 import PropTypes from 'prop-types';
+import { LinkContainer } from 'react-router-bootstrap';
 
 import 'bootstrap/dist/css/bootstrap.min.css';
 
@@ -22,8 +23,12 @@ const Header = () => (
     <Navbar className="container-fluid">
         <Navbar.Brand>Issue Tracker</Navbar.Brand>
         <Nav className="mr-auto">
-            <Nav.Link href="/issues">Issues</Nav.Link>
-            <Nav.Link href="/reports">Reports</Nav.Link>
+            <LinkContainer to="/issues">
+                <Nav.Link>Issues</Nav.Link>
+            </LinkContainer>
+            <LinkContainer to="/reports">
+                <Nav.Link>Reports</Nav.Link>
+            </LinkContainer>
         </Nav>
         <Nav className="ml-auto">
             <Nav.Link><i className="fa fa-plus" aria-hidden="true" /> Create Issue</Nav.Link>
@@ -39,13 +44,12 @@ function App(props) {
     return (
         <div>
             <Header />
-            <hr />
             <div className="container-fluid">
                 {children}
                 <hr />
                 <h5>
                     <small>
-                        Full source available at
+                        Full source available at&nbsp;
                         <a href="https://github.com/mbmcmullen27/pro-mern-stack">Glub...</a>
                     </small>
                 </h5>

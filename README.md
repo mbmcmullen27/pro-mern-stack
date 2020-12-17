@@ -489,3 +489,23 @@ pullRight becomes
 * Link containers needed to be removed and Nav.Items changed to Nav.links with hrefs
     * noCaret is removed because it's not optional with the styles anymore - see index.html for #user-dropdown style
     * Book exercices say not to do this because link container will also show what link is active
+
+##### 12/17/20 
+
+* link containers added back, Nav.Items-> Nav.links is all we needed. not using hrefs.
+
+> 'Panel' (imported as 'Panel') was not found in 'react-bootstrap'
+
+![removed](https://react-bootstrap.netlify.app/migrating/#panel), replaced with Card components
+I think we need to use accordian instead
+
+* accordion works, requires eventKey for it to function properly. Getting the feeling eventKey might be out of the scope of this book.
+* might be because accordion is using a button instead of an a tag but using block dislpay for the button centers the text
+    * not a big issue but should look at how to left justify
+
+    ![controlLabel renamed to FormLabel](https://react-bootstrap.netlify.app/migrating/)
+* InputGroup#
+removed InputGroup.Button, and InputGroup.Addon
+added InputGroup.Prepend, InputGroup.Append, InputGroup.Text, InputGroup.Checkbox, InputGroup.Radio
+
+* form control componentClass attribut becomes "as"

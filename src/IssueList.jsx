@@ -1,6 +1,8 @@
 import React from 'react';
 import { Link } from 'react-router-dom';
-import { Button } from 'react-bootstrap';
+import {
+    Button, Table, Accordion, Card
+} from 'react-bootstrap';
 import 'whatwg-fetch';
 import PropTypes from 'prop-types';
 import IssueAdd from './IssueAdd.jsx'
@@ -41,7 +43,7 @@ function IssueTable(props) {
         (issue) => <IssueRow key={issue._id} issue={issue} deleteIssue={props.deleteIssue} />
     )
     return (
-        <table className="bordered-table">
+        <Table bordered condensed hover responsive>
             <thead>
                 <tr>
                     <th>Id</th>
@@ -55,7 +57,7 @@ function IssueTable(props) {
                 </tr>
             </thead>
             <tbody>{issueRows}</tbody>
-        </table>
+        </Table>
     )
 }
 IssueTable.propTypes = {
@@ -166,8 +168,21 @@ export default class IssueList extends React.Component {
         const { ...props } = this.props;
         return (
             <div>
-                <IssueFilter setFilter={this.setFilter} initFilter={props.location.search} />
-                <hr />
+                <Accordion>
+                    <Card>
+                        <Card.Header>
+                            <Accordion.Toggle as={Button} variant="link" eventKey="0">
+                                Filter
+                            </Accordion.Toggle>
+                        </Card.Header>
+                        <Accordion.Collapse eventKey="0">
+                            <IssueFilter
+                                setFilter={this.setFilter}
+                                initFilter={props.location.search}
+                            />
+                        </Accordion.Collapse>
+                    </Card>
+                </Accordion>
                 <IssueTable issues={issues} deleteIssue={this.deleteIssue} />
                 <button type="button" onClick={this.createTestIssue}>Glub</button>
                 <hr />
