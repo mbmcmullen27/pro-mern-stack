@@ -509,3 +509,13 @@ removed InputGroup.Button, and InputGroup.Addon
 added InputGroup.Prepend, InputGroup.Append, InputGroup.Text, InputGroup.Checkbox, InputGroup.Radio
 
 * form control componentClass attribut becomes "as"
+
+##### 12/18/20
+
+bsStyle -> variant
+
+* think I got the link/import of Bootstrap to work same as the book by changing the cleanWebpack plugin to ignore the link in the static folder
+    * removed the import from app.jsx
+* The other was WAS working, I do feel a bit strange about importing from the index instead of through npm
+* condensed attribute in Table is no longer available switched it to 'striped' for fun
+

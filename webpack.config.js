@@ -19,7 +19,7 @@ module.exports = {
         },
     },
     plugins: [
-        new CleanWebpackPlugin({ cleanStaleWebpackAssets: false }),
+        new CleanWebpackPlugin({ cleanOnceBeforeBuildPatterns: ['!bootstrap'] }),
         new HtmlWebpackPlugin({
             template: './src/index.html'
         }),

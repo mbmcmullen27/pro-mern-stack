@@ -43,7 +43,7 @@ function IssueTable(props) {
         (issue) => <IssueRow key={issue._id} issue={issue} deleteIssue={props.deleteIssue} />
     )
     return (
-        <Table bordered condensed hover responsive>
+        <Table bordered striped hover responsive>
             <thead>
                 <tr>
                     <th>Id</th>
@@ -184,9 +184,10 @@ export default class IssueList extends React.Component {
                     </Card>
                 </Accordion>
                 <IssueTable issues={issues} deleteIssue={this.deleteIssue} />
-                <button type="button" onClick={this.createTestIssue}>Glub</button>
                 <hr />
                 <IssueAdd createIssue={this.createIssue} />
+                <hr />
+                <Button variant="success" type="button" onClick={this.createTestIssue}>Glub</Button>
             </div>
         )
     }

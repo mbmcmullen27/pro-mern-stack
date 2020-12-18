@@ -6,8 +6,6 @@ import {
 import PropTypes from 'prop-types';
 import { LinkContainer } from 'react-router-bootstrap';
 
-import 'bootstrap/dist/css/bootstrap.min.css';
-
 import {
     BrowserRouter as Router,
     Redirect, Route, Switch, withRouter

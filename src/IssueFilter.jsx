@@ -98,7 +98,7 @@ export default class IssueFilter extends React.Component {
                                 value={state.effort_gte}
                                 onChange={this.onChangeEffortGte}
                             />
-                            <InputGroup.Append>-</InputGroup.Append>
+                            <InputGroup.Append>&nbsp;-&nbsp;</InputGroup.Append>
                             <FormControl
                                 value={state.effort_lte}
                                 onChange={this.onChangeEffortLte}
@@ -110,9 +110,13 @@ export default class IssueFilter extends React.Component {
                     <FormGroup>
                         <FormLabel>&nbsp;</FormLabel>
                         <ButtonToolbar>
-                            <Button bsStyle="primary" onClick={this.applyFilter}>Glub</Button>
-                            <Button onClick={this.resetFilter}>Reset</Button>
-                            <Button onClick={this.clearFilter}>Clear</Button>
+                            <Button variant="primary" onClick={this.applyFilter}>Glub</Button>
+                            &nbsp;
+                            <Button variant="secondary" onClick={this.resetFilter} disabled={!state.changed}>
+                                Reset
+                            </Button>
+                            &nbsp;
+                            <Button variant="secondary" onClick={this.clearFilter}>Clear</Button>
                         </ButtonToolbar>
                     </FormGroup>
                 </Col>
