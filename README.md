@@ -519,3 +519,22 @@ bsStyle -> variant
 * The other was WAS working, I do feel a bit strange about importing from the index instead of through npm
 * condensed attribute in Table is no longer available switched it to 'striped' for fun
 
+##### 12/19 Horizontal Forms
+* replaced all controlLabels with FormLabels and swapped Panel for Card
+* Link container takes a Nav.Link 
+* smOffset becomes an offset field in the "sm" object, the original number held by sm becomes a span in the same object
+* Form Groups needing significant refactoring
+    * nothing rendering at this point, going back and adding one at a time based on the new syntax
+    * noValidate on the root Form tag to block browser native html validation
+* if you change the completion date in the edit form you must change it to a valid date, you can't remove completion date once it is set
+
+```jsx
+<Form.Group as={Row} controlId="formIssueTitle">
+    <Form.Label column sm={3}>
+        Title:
+    </Form.Label>
+    <Col sm={9}>
+        <Form.Control type="text" name="title" value={issue.title} onChange={this.onChange} />
+    </Col>
+</Form.Group>
+```

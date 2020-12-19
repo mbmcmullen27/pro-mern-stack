@@ -1,5 +1,9 @@
 import React from 'react';
-import { Link } from 'react-router-dom';
+import {
+    ButtonToolbar, Button, Nav,
+    Card, Form, Col, Row
+} from 'react-bootstrap';
+import { LinkContainer } from 'react-router-bootstrap';
 import PropTypes from 'prop-types';
 import NumInput from './NumInput.jsx';
 import DateInput from './DateInput.jsx';
@@ -107,42 +111,98 @@ export default class IssueEdit extends React.Component {
         const validationMessage = Object.keys(invalidFields).length === 0
             ? null : (<div className="error"> Please correct invalid fields before submitting.</div>)
         return (
-            <div>
-                <form onSubmit={this.onSubmit}>
-                    ID: {issue._id}
-                    <br />
-                    Created: {issue.created ? issue.created.toDateString() : ''}
-                    <br />
-                    Status:
-                    <select name="status" value={issue.status} onChange={this.onChange}>
-                        <option value="New">New</option>
-                        <option value="Open">Open</option>
-                        <option value="Assigned">Assigned</option>
-                        <option value="Fixed">Fixed</option>
-                        <option value="Verified">Verified</option>
-                        <option value="Closed">Closed</option>
-                    </select>
-                    <br />
-                    Owner: <input name="owner" value={issue.owner} onChange={this.onChange} />
-                    <br />
-                    Effort: <NumInput size={5} name="effort" value={issue.effort} onChange={this.onChange} />
-                    <br />
-                    Completion Date:&nbsp;
-                    <DateInput
-                        name="completionDate"
-                        value={issue.completionDate}
-                        onChange={this.onChange}
-                        onValidityChange={this.onValidityChange}
-                    />
-                    <br />
-                    Title: <input name="title" size={50} value={issue.title} onChange={this.onChange} />
-                    <br />
+            <Card header="">
+                <Card.Header>Edit Issue</Card.Header>
+                <Card.Body>
+                    <Form
+                        noValidate
+                        validated={Object.keys(invalidFields).length === 0}
+                        onSubmit={this.onSubmit}
+                    >
+                        <Form.Group as={Row} controlId="formIssueId">
+                            <Form.Label column sm={3}>
+                                ID:
+                            </Form.Label>
+                            <Col sm={9}>
+                                <Form.Control plaintext readOnly defaultValue={issue._id} />
+                            </Col>
+                        </Form.Group>
+                        <Form.Group as={Row} controlId="formIssueCreated">
+                            <Form.Label column sm={3}>
+                                Created:
+                            </Form.Label>
+                            <Col sm={9}>
+                                <Form.Control plaintext readOnly defaultValue={issue.created ? issue.created.toDateString() : ''} />
+                            </Col>
+                        </Form.Group>
+                        <Form.Group as={Row} controlId="formIssueStatus">
+                            <Form.Label column sm={3}>
+                                Status:
+                            </Form.Label>
+                            <Col sm={9}>
+                                <Form.Control as="select" name="status" value={issue.status} onChange={this.onChange}>
+                                    <option value="New">New</option>
+                                    <option value="Open">Open</option>
+                                    <option value="Assigned">Assigned</option>
+                                    <option value="Fixed">Fixed</option>
+                                    <option value="Verified">Verified</option>
+                                    <option value="Closed">Closed</option>
+                                </Form.Control>
+                            </Col>
+                        </Form.Group>
+                        <Form.Group as={Row} controlId="formIssueOwner">
+                            <Form.Label column sm={3}>
+                                Owner:
+                            </Form.Label>
+                            <Col sm={9}>
+                                <Form.Control type="text" name="owner" value={issue.owner} onChange={this.onChange} />
+                            </Col>
+                        </Form.Group>
+                        <Form.Group as={Row} controlId="formIssueEffort">
+                            <Form.Label column sm={3}>
+                                Effort:
+                            </Form.Label>
+                            <Col sm={9}>
+                                <Form.Control as={NumInput} name="effort" value={issue.effort} onChange={this.onChange} />
+                            </Col>
+                        </Form.Group>
+                        <Form.Group as={Row} controlId="formIssueCompletion">
+                            <Form.Label column sm={3}>
+                                Completion Date:
+                            </Form.Label>
+                            <Col sm={9}>
+                                <Form.Control
+                                    as={DateInput}
+                                    name="completionDate"
+                                    value={issue.completionDate}
+                                    onChange={this.onChange}
+                                    onValidityChange={this.onValidityChange}
+                                    isInvalid={!!invalidFields.completionDate}
+                                />
+                            </Col>
+                        </Form.Group>
+                        <Form.Group as={Row} controlId="formIssueTitle">
+                            <Form.Label column sm={3}>
+                                Title:
+                            </Form.Label>
+                            <Col sm={9}>
+                                <Form.Control type="text" name="title" value={issue.title} onChange={this.onChange} />
+                            </Col>
+                        </Form.Group>
+                        <Form.Group>
+                            <Col sm={{ offset: 3, span: 6 }}>
+                                <ButtonToolbar>
+                                    <Button variant="primary" type="submit">Glub</Button>
+                                    <LinkContainer to="/issues">
+                                        <Nav.Link>Back</Nav.Link>
+                                    </LinkContainer>
+                                </ButtonToolbar>
+                            </Col>
+                        </Form.Group>
+                    </Form>
                     {validationMessage}
-                    <button type="submit">Glub</button>&nbsp;
-                    <Link to="/issues">Back to issue list</Link>
-
-                </form>
-            </div>
+                </Card.Body>
+            </Card>
         )
     }
 }

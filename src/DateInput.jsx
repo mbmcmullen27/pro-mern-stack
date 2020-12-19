@@ -31,7 +31,7 @@ export default class DateInput extends React.Component {
         const { ...state } = this.state;
         const { ...props } = this.props;
         const value = DateInput.unformat(state.value);
-        const valid = state.value === '' || value != null;
+        const valid = value === '' || value != null;
         if (valid !== state.valid && props.onValidityChange) {
             props.onValidityChange(e, value);
         }
@@ -48,12 +48,14 @@ export default class DateInput extends React.Component {
     render() {
         const { ...state } = this.state;
         const { ...props } = this.props;
-        const className = (!state.valid && !state.focused) ? 'invalid' : null;
         const value = (state.focused || !state.valid)
             ? state.value : DateInput.displayFormat(props.value);
+        const childProps = { ...props };
+        delete childProps.onValidityChange;
         return (
             <input
-                type="text" size={20} name={props.name} className={className} //eslint-disable-line
+                type="text"
+                { ...childProps } //eslint-disable-line
                 value={value} placeholder={state.focused ? 'yyyy-mm-dd' : null} //eslint-disable-line
                 onFocus={this.onFocus} onBlur={this.onBlur} onChange={this.onChange} //eslint-disable-line
             />
