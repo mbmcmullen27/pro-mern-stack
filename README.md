@@ -528,6 +528,9 @@ bsStyle -> variant
     * noValidate on the root Form tag to block browser native html validation
 * if you change the completion date in the edit form you must change it to a valid date, you can't remove completion date once it is set
 
+* went back and added the card.body to the issue filter to fix formatting
+    * I also fiddled with the column values to something that makes more sense I think
+
 ```jsx
 <Form.Group as={Row} controlId="formIssueTitle">
     <Form.Label column sm={3}>

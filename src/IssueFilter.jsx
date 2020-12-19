@@ -1,7 +1,7 @@
 import React from 'react';
 import PropTypes from 'prop-types';
 import {
-    Col, Row, FormGroup, FormControl, FormLabel, InputGroup, ButtonToolbar, Button
+    Card, Col, Row, Form, InputGroup, ButtonToolbar, Button
 } from 'react-bootstrap';
 
 export default class IssueFilter extends React.Component {
@@ -71,56 +71,60 @@ export default class IssueFilter extends React.Component {
     render() {
         const { ...state } = this.state;
         return (
-            <Row>
-                <Col xs={6} sm={4} md={3} lg={2}>
-                    <FormGroup>
-                        <FormLabel>Status</FormLabel>
-                        <FormControl
-                            as="select"
-                            value={state.status}
-                            onChange={this.onChangeStatus}
-                        >
-                            <option value="">(Any)</option>
-                            <option value="New">New</option>
-                            <option value="Open">Open</option>
-                            <option value="Assigned">Assigned</option>
-                            <option value="Fixed">Fixed</option>
-                            <option value="Verified">Verified</option>
-                            <option value="Closed">Closed</option>
-                        </FormControl>
-                    </FormGroup>
-                </Col>
-                <Col xs={6} sm={4} md={3} lg={2}>
-                    <FormGroup>
-                        <FormLabel>Effort</FormLabel>
-                        <InputGroup>
-                            <FormControl
-                                value={state.effort_gte}
-                                onChange={this.onChangeEffortGte}
-                            />
-                            <InputGroup.Append>&nbsp;-&nbsp;</InputGroup.Append>
-                            <FormControl
-                                value={state.effort_lte}
-                                onChange={this.onChangeEffortLte}
-                            />
-                        </InputGroup>
-                    </FormGroup>
-                </Col>
-                <Col xs={6} sm={4} md={3} lg={2}>
-                    <FormGroup>
-                        <FormLabel>&nbsp;</FormLabel>
-                        <ButtonToolbar>
-                            <Button variant="primary" onClick={this.applyFilter}>Glub</Button>
-                            &nbsp;
-                            <Button variant="secondary" onClick={this.resetFilter} disabled={!state.changed}>
-                                Reset
-                            </Button>
-                            &nbsp;
-                            <Button variant="secondary" onClick={this.clearFilter}>Clear</Button>
-                        </ButtonToolbar>
-                    </FormGroup>
-                </Col>
-            </Row>
+            <Card.Body>
+                <Row>
+                    <Col xs={12} sm={4} md={3}>
+                        <Form.Group>
+                            <Form.Label>Status</Form.Label>
+                            <Form.Control
+                                as="select"
+                                value={state.status}
+                                onChange={this.onChangeStatus}
+                            >
+                                <option value="">(Any)</option>
+                                <option value="New">New</option>
+                                <option value="Open">Open</option>
+                                <option value="Assigned">Assigned</option>
+                                <option value="Fixed">Fixed</option>
+                                <option value="Verified">Verified</option>
+                                <option value="Closed">Closed</option>
+                            </Form.Control>
+                        </Form.Group>
+                    </Col>
+                    <Col xs={12} sm={4} md={3}>
+                        <Form.Group>
+                            <Form.Label>Effort</Form.Label>
+                            <InputGroup>
+                                <Form.Control
+                                    value={state.effort_gte}
+                                    onChange={this.onChangeEffortGte}
+                                />
+                                <InputGroup.Append>
+                                    <InputGroup.Text>-</InputGroup.Text>
+                                </InputGroup.Append>
+                                <Form.Control
+                                    value={state.effort_lte}
+                                    onChange={this.onChangeEffortLte}
+                                />
+                            </InputGroup>
+                        </Form.Group>
+                    </Col>
+                    <Col xs={12} sm={4} md={3}>
+                        <Form.Group>
+                            <Form.Label>&nbsp;</Form.Label>
+                            <ButtonToolbar>
+                                <Button variant="primary" onClick={this.applyFilter}>Glub</Button>
+                                &nbsp;
+                                <Button variant="secondary" onClick={this.resetFilter} disabled={!state.changed}>
+                                    Reset
+                                </Button>
+                                &nbsp;
+                                <Button variant="secondary" onClick={this.clearFilter}>Clear</Button>
+                            </ButtonToolbar>
+                        </Form.Group>
+                    </Col>
+                </Row>
+            </Card.Body>
         )
     }
 }
