@@ -5,8 +5,10 @@ import {
 } from 'react-bootstrap';
 import 'whatwg-fetch';
 import PropTypes from 'prop-types';
+
 import IssueAdd from './IssueAdd.jsx'
 import IssueFilter from './IssueFilter.jsx'
+import Toast from './Toast.jsx'
 
 const IssueRow = (props) => {
     function onDeleteClick() {
@@ -68,7 +70,15 @@ IssueTable.propTypes = {
 export default class IssueList extends React.Component {
     constructor() {
         super();
-        this.state = { issues: [] };
+        this.state = {
+            issues: [],
+            toastVisible: false,
+            toastMessage: '',
+            toastType: 'success' 
+        };
+
+        this.showError = this.showError.bind(this);
+        this.dismissToast = this.dismissToast.bind(this);
 
         this.createIssue = this.createIssue.bind(this);
         this.createTestIssue = this.createTestIssue.bind(this);
@@ -92,6 +102,14 @@ export default class IssueList extends React.Component {
 
     setFilter(query) {
         this.props.history.push({ pathname: this.props.location.pathname, search: query.search }); //eslint-disable-line
+    }
+
+    showError(message) {
+        this.setState({ toastVisible: true, toastMessage: message, toastType: 'danger' })
+    }
+
+    dismissToast() {
+        this.setState({ toastVisible: false })
     }
 
     deleteIssue(id) {
@@ -119,12 +137,12 @@ export default class IssueList extends React.Component {
                 });
             } else {
                 response.json().then((error) => {
-                    alert(`Failed to fetch issues: ${error.message}`)
+                    this.showError(`Failed to fetch issues: ${error.message}`)
                 })
             }
         })
             .catch((err) => {
-                console.log('Error in fetching data from server:', err); //eslint-disable-line
+                this.showError('Error in fetching data from server:', err); //eslint-disable-line
             });
     }
 
@@ -145,12 +163,12 @@ export default class IssueList extends React.Component {
                 })
             } else {
                 response.json().then((error) => {
-                    alert(`Failed to add issue:  ${error.message}`)
+                    this.showError(`Failed to add issue:  ${error.message}`)
                 });
             }
         })
             .catch((err) => {
-                alert(`Error in sending glub to server: ${err.message}`);
+                this.showError(`Error in sending glub to server: ${err.message}`);
             });
     }
 
@@ -164,7 +182,7 @@ export default class IssueList extends React.Component {
     }
 
     render() {
-        const { issues } = this.state;
+        const { issues, toastVisible, toastMessage, toastType } = this.state;
         const { ...props } = this.props;
         return (
             <div>
@@ -186,6 +204,12 @@ export default class IssueList extends React.Component {
                 <IssueTable issues={issues} deleteIssue={this.deleteIssue} />
                 <hr />
                 <IssueAdd createIssue={this.createIssue} />
+                <Toast
+                    showing={toastVisible}
+                    message={toastMessage}
+                    onDismiss={this.dismissToast}
+                    variant={toastType}
+                />
                 <hr />
                 <Button variant="success" type="button" onClick={this.createTestIssue}>Glub</Button>
             </div>
