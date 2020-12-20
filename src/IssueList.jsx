@@ -74,7 +74,7 @@ export default class IssueList extends React.Component {
             issues: [],
             toastVisible: false,
             toastMessage: '',
-            toastType: 'success' 
+            toastType: 'success'
         };
 
         this.showError = this.showError.bind(this);
@@ -182,7 +182,9 @@ export default class IssueList extends React.Component {
     }
 
     render() {
-        const { issues, toastVisible, toastMessage, toastType } = this.state;
+        const {
+            issues, toastVisible, toastMessage, toastType
+        } = this.state;
         const { ...props } = this.props;
         return (
             <div>

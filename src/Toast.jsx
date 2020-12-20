@@ -9,9 +9,6 @@ export default class Toast extends React.Component {
             clearTimeout(this.dismissTimer);
             this.dismissTimer = setTimeout(props.onDismiss, 5000);
         }
-
-        console.log('did update...')
-        console.log({props})
     }
 
     componentWillUnmount() {
