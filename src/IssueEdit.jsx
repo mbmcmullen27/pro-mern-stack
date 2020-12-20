@@ -1,12 +1,14 @@
 import React from 'react';
 import {
     ButtonToolbar, Button, Nav,
-    Card, Form, Col, Row
+    Card, Form, Col, Row, Alert
 } from 'react-bootstrap';
 import { LinkContainer } from 'react-router-bootstrap';
 import PropTypes from 'prop-types';
+
 import NumInput from './NumInput.jsx';
 import DateInput from './DateInput.jsx';
+import Toast from './Toast.jsx';
 
 export default class IssueEdit extends React.Component {
     constructor() {
@@ -21,8 +23,20 @@ export default class IssueEdit extends React.Component {
                 completionDate: null,
                 created: ''
             },
-            invalidFields: {}
+            invalidFields: {},
+            showingValidation: false,
+
+            toastVisible: false,
+            toastMessage: '',
+            toastType: 'success'
         };
+
+        this.dismissValidation = this.dismissValidation.bind(this);
+        this.showValidation = this.showValidation.bind(this);
+
+        this.showSuccess = this.showSuccess.bind(this);
+        this.showError = this.showError.bind(this);
+        this.dismissToast = this.dismissToast.bind(this);
 
         this.onChange = this.onChange.bind(this);
         this.onValidityChange = this.onValidityChange.bind(this);
@@ -42,6 +56,7 @@ export default class IssueEdit extends React.Component {
 
     onSubmit(event) {
         event.preventDefault();
+        this.showValidation();
 
         const { ...state } = this.state;
         const { ...props } = this.props;
@@ -61,15 +76,15 @@ export default class IssueEdit extends React.Component {
                         updatedIssue.completionDate = new Date(updatedIssue.completionDate);
                     }
                     this.setState({ issue: updatedIssue })
-                    alert('Updated issue successfully.')
+                    this.showSuccess('Updated issue successfully.')
                 })
             } else {
                 response.json().then((error) => {
-                    alert(`Failed to update issue: ${error.message}`)
+                    this.showError(`Failed to update issue: ${error.message}`)
                 })
             }
         }).catch((err) => {
-            alert(`Error in sending data to server: ${err.message}`)
+            this.showError(`Error in sending data to server: ${err.message}`)
         })
     }
 
@@ -90,6 +105,26 @@ export default class IssueEdit extends React.Component {
         this.setState({ invalidFields })
     }
 
+    showValidation() {
+        this.setState({ showingValidation: true });
+    }
+
+    dismissValidation() {
+        this.setState({ showingValidation: false });
+    }
+
+    showSuccess(message) {
+        this.setState({ toastVisible: true, toastMessage: message, toastType: 'success' });
+    }
+
+    showError(message) {
+        this.setState({ toastVisible: true, toastMessage: message, toastType: 'danger' });
+    }
+
+    dismissToast() {
+        this.setState({ toastVisible: false });
+    }
+
     loadData() {
         const { ...props } = this.props;
         fetch(`/api/issues/${props.match.params.id}`).then((response) => {
@@ -101,22 +136,38 @@ export default class IssueEdit extends React.Component {
                     issue.effort = issue.effort != null ? issue.effort.toString() : '';
                     this.setState({ issue })
                 })
+            } else {
+                response.json().then((error) => {
+                    this.showError(`Failed to fetch issue: ${error.message}`)
+                })
             }
+        }).catch((err) => {
+            this.showError(`Error in fetching data from server: ${err.message}`)
         })
     }
 
     render() {
-        const { issue } = this.state;
-        const { invalidFields } = this.state;
-        const validationMessage = Object.keys(invalidFields).length === 0
-            ? null : (<div className="error"> Please correct invalid fields before submitting.</div>)
+        const {
+            issue, invalidFields, showingValidation,
+            toastVisible, toastMessage, toastType
+        } = this.state;
+
+        let validationMessage = null;
+
+        if (Object.keys(invalidFields).length !== 0 && showingValidation) {
+            validationMessage = (
+                <Alert variant="danger" dismissible onClose={this.dismissValidation}>
+                    Please correct invalid fields before you Glub.
+                </Alert>
+            )
+        }
+
         return (
             <Card header="">
                 <Card.Header>Edit Issue</Card.Header>
                 <Card.Body>
                     <Form
                         noValidate
-                        validated={Object.keys(invalidFields).length === 0}
                         onSubmit={this.onSubmit}
                     >
                         <Form.Group as={Row} controlId="formIssueId">
@@ -189,7 +240,7 @@ export default class IssueEdit extends React.Component {
                                 <Form.Control type="text" name="title" value={issue.title} onChange={this.onChange} />
                             </Col>
                         </Form.Group>
-                        <Form.Group>
+                        <Form.Group as={Row} controlId="formIssueButtons">
                             <Col sm={{ offset: 3, span: 6 }}>
                                 <ButtonToolbar>
                                     <Button variant="primary" type="submit">Glub</Button>
@@ -199,8 +250,18 @@ export default class IssueEdit extends React.Component {
                                 </ButtonToolbar>
                             </Col>
                         </Form.Group>
+                        <Form.Group as={Row} controlId="formIssueValidation">
+                            <Col sm={{ offset: 3, span: 9 }}>
+                                {validationMessage}
+                            </Col>
+                        </Form.Group>
                     </Form>
-                    {validationMessage}
+                    <Toast
+                        showing={toastVisible}
+                        message={toastMessage}
+                        onDismiss={this.dismissToast}
+                        variant={toastType}
+                    />
                 </Card.Body>
             </Card>
         )

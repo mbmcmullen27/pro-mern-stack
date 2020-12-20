@@ -541,3 +541,12 @@ bsStyle -> variant
     </Col>
 </Form.Group>
 ```
+
+##### 12/20 Alerts
+
+* Alert
+    * onDismiss renamed to onClose
+
+* showError doesn't seem to get called at all?
+* success message is working, so the issue is we just never toss an exception to catch in the fetch... I think
+    * I forget if we're blocking the request if validation doesn't pass... I think this is the cases
