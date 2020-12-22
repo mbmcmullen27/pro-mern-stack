@@ -550,3 +550,7 @@ bsStyle -> variant
 * showError doesn't seem to get called at all?
 * success message is working, so the issue is we just never toss an exception to catch in the fetch... I think
     * I forget if we're blocking the request if validation doesn't pass... I think this is the cases
+
+
+##### 12/22 Modal
+* modal pops up but hide/cancel buttons don't work. also document.forms api seems to have changed, having trouble extracting values from the modal to submit

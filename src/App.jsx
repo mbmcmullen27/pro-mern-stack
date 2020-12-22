@@ -13,6 +13,7 @@ import {
 
 import IssueList from './IssueList.jsx';
 import IssueEdit from './IssueEdit.jsx';
+import IssueAddNavItem from './IssueAddNavItem.jsx';
 
 const contentNode = document.getElementById('contents');
 const NoMatch = () => <p>Page Not Found... glub...</p>;
@@ -29,7 +30,7 @@ const Header = () => (
             </LinkContainer>
         </Nav>
         <Nav className="ml-auto">
-            <Nav.Link><i className="fa fa-plus" aria-hidden="true" /> Create Issue</Nav.Link>
+            <IssueAddNavItem />
             <NavDropdown id="user-dropdown" title={<i className="fa fa-ellipsis-h" aria-hidden="true" />}>
                 <NavDropdown.Item>Logout</NavDropdown.Item>
             </NavDropdown>
