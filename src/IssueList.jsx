@@ -188,6 +188,12 @@ export default class IssueList extends React.Component {
         const { ...props } = this.props;
         return (
             <div>
+                <Toast
+                    showing={toastVisible}
+                    message={toastMessage}
+                    onDismiss={this.dismissToast}
+                    variant={toastType}
+                />
                 <Accordion>
                     <Card>
                         <Card.Header>
@@ -206,12 +212,6 @@ export default class IssueList extends React.Component {
                 <IssueTable issues={issues} deleteIssue={this.deleteIssue} />
                 <hr />
                 <IssueAdd createIssue={this.createIssue} />
-                <Toast
-                    showing={toastVisible}
-                    message={toastMessage}
-                    onDismiss={this.dismissToast}
-                    variant={toastType}
-                />
                 <hr />
                 <Button variant="success" type="button" onClick={this.createTestIssue}>Glub</Button>
             </div>

@@ -4,7 +4,6 @@ import {
     NavItem, Modal, Form, Button, ButtonToolbar
 } from 'react-bootstrap';
 import PropTypes from 'prop-types';
-
 import Toast from './Toast.jsx';
 
 class IssueAddNavItem extends React.Component {
@@ -29,6 +28,7 @@ class IssueAddNavItem extends React.Component {
     }
 
     hideModal() {
+        console.log('hide Modal...')
         this.setState({ showing: false })
     }
 
@@ -45,12 +45,13 @@ class IssueAddNavItem extends React.Component {
         this.hideModal();
         const form = document.forms.issueAdd.elements;
         const newIssue = {
-            owner: form.owner,
-            title: form.title,
+            owner: form.owner.value,
+            title: form.title.value,
             status: 'New',
             created: new Date()
         }
 
+        console.log({ newIssue })
         const { ...props } = this.props;
         fetch('/api/issues', {
             method: 'POST',
@@ -77,29 +78,31 @@ class IssueAddNavItem extends React.Component {
             <NavItem onClick={this.showModal}>
                 <i className="fa fa-plus" aria-hidden="true" />
                 Create Issue
-                <Modal keyboard show={state.showing} onHide={this.hideModal}>
-                    <Modal.Header closeButton>
-                        <Modal.Title>Create Issue</Modal.Title>
-                    </Modal.Header>
-                    <Modal.Body>
-                        <Form name="issueAdd">
-                            <Form.Group>
-                                <Form.Label>Title</Form.Label>
-                                <Form.Control name="title" autoFocus />
-                            </Form.Group>
-                            <Form.Group>
-                                <Form.Label>Owner</Form.Label>
-                                <Form.Control name="owner" />
-                            </Form.Group>
-                        </Form>
-                    </Modal.Body>
-                    <Modal.Footer>
-                        <ButtonToolbar>
-                            <Button type="button" variant="primary" onClick={this.submit}>Glub</Button>
-                            <Button type="button" variant="link" onClick={this.hideModal}>Cancel</Button>
-                        </ButtonToolbar>
-                    </Modal.Footer>
-                </Modal>
+                <div onClick={e=>e.stopPropagation()}> {/*eslint-disable-line*/}
+                    <Modal show={state.showing} onHide={this.hideModal}>
+                        <Modal.Header closeButton>
+                            <Modal.Title>Create Issue</Modal.Title>
+                        </Modal.Header>
+                        <Modal.Body>
+                            <Form name="issueAdd">
+                                <Form.Group>
+                                    <Form.Label>Title</Form.Label>
+                                    <Form.Control name="title" autoFocus />
+                                </Form.Group>
+                                <Form.Group>
+                                    <Form.Label>Owner</Form.Label>
+                                    <Form.Control name="owner" />
+                                </Form.Group>
+                            </Form>
+                        </Modal.Body>
+                        <Modal.Footer>
+                            <ButtonToolbar>
+                                <Button type="submit" variant="primary" onClick={this.submit}>Glub</Button>
+                                <Button type="button" variant="link" onClick={this.hideModal}>Cancel</Button>
+                            </ButtonToolbar>
+                        </Modal.Footer>
+                    </Modal>
+                </div>
                 <Toast
                     showing={state.toastVisible}
                     message={state.toastMessage}

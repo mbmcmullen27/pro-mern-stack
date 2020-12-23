@@ -554,3 +554,6 @@ bsStyle -> variant
 
 ##### 12/22 Modal
 * modal pops up but hide/cancel buttons don't work. also document.forms api seems to have changed, having trouble extracting values from the modal to submit
+
+##### 12/23
+* needed to wrap just the modal in a div and stopPropagation on clicks
