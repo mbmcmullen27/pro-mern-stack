@@ -28,7 +28,6 @@ class IssueAddNavItem extends React.Component {
     }
 
     hideModal() {
-        console.log('hide Modal...')
         this.setState({ showing: false })
     }
 
@@ -43,7 +42,7 @@ class IssueAddNavItem extends React.Component {
     submit(e) {
         e.preventDefault();
         this.hideModal();
-        const form = document.forms.issueAdd.elements;
+        const form = document.forms.issueAddModal.elements;
         const newIssue = {
             owner: form.owner.value,
             title: form.title.value,
@@ -51,7 +50,6 @@ class IssueAddNavItem extends React.Component {
             created: new Date()
         }
 
-        console.log({ newIssue })
         const { ...props } = this.props;
         fetch('/api/issues', {
             method: 'POST',
@@ -60,7 +58,7 @@ class IssueAddNavItem extends React.Component {
         }).then((response) => {
             if (response.ok) {
                 response.json().then((updatedIssue) => {
-                    props.router.push(`/issues/${updatedIssue._id}`)
+                    props.history.push({ pathname: `/issues/${updatedIssue._id}` })
                 })
             } else {
                 response.json().then((error) => {
@@ -84,7 +82,7 @@ class IssueAddNavItem extends React.Component {
                             <Modal.Title>Create Issue</Modal.Title>
                         </Modal.Header>
                         <Modal.Body>
-                            <Form name="issueAdd">
+                            <Form name="issueAddModal">
                                 <Form.Group>
                                     <Form.Label>Title</Form.Label>
                                     <Form.Control name="title" autoFocus />

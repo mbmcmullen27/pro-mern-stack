@@ -557,3 +557,7 @@ bsStyle -> variant
 
 ##### 12/23
 * needed to wrap just the modal in a div and stopPropagation on clicks
+
+##### 12/24
+* the issueAdd form still exists on the page and the names were colliding, and we were sending null. Changed the form in the modal to issueAddModal, now we're pulling the fields out of the modal correctly.
+* and when we use with router we need to push to props.history not directly to the router apparently
