@@ -561,3 +561,10 @@ bsStyle -> variant
 ##### 12/24
 * the issueAdd form still exists on the page and the names were colliding, and we were sending null. Changed the form in the modal to issueAddModal, now we're pulling the fields out of the modal correctly.
 * and when we use with router we need to push to props.history not directly to the router apparently
+
+##### 12/25
+* on issueList, toast displays underneath the Accordian issueFilter. Wonder if it has something to do with both being a Collapse and only 1 having an event key?
+* modal works but hovering over the create button doesn't display a pointer
+
+* seeing that react-bootstrap has its own toast component may switch to that instead
+* the full accordion is on top, open or closed, maybe it has a position that's taking precendent

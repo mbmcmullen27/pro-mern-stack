@@ -122,8 +122,6 @@ export default class IssueList extends React.Component {
 
     loadData() {
         const { ...props } = this.props;
-        // console.log({ location })
-        // console.log({ match })
         fetch(`/api/issues${props.location.search}`).then((response) => {
             if (response.ok) {
                 response.json().then((data) => {
@@ -142,7 +140,7 @@ export default class IssueList extends React.Component {
             }
         })
             .catch((err) => {
-                this.showError('Error in fetching data from server:', err); //eslint-disable-line
+                this.showError('Error in fetching data from server:', err);
             });
     }
 
@@ -197,11 +195,11 @@ export default class IssueList extends React.Component {
                 <Accordion>
                     <Card>
                         <Card.Header>
-                            <Accordion.Toggle as={Button} variant="link" eventKey="0">
+                            <Accordion.Toggle as={Button} variant="link" eventKey="filter-collapse">
                                 Filter
                             </Accordion.Toggle>
                         </Card.Header>
-                        <Accordion.Collapse eventKey="0">
+                        <Accordion.Collapse eventKey="filter-collapse">
                             <IssueFilter
                                 setFilter={this.setFilter}
                                 initFilter={props.location.search}
