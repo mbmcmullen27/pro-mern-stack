@@ -26,7 +26,7 @@ export default class Toast extends React.Component {
         }
 
         return (
-            <Collapse in={props.showing}>
+            <Collapse in={props.showing} eventKey="alert-collapse">
                 <div style={divStyle}>
                     <Alert
                         variant={props.variant}

@@ -568,3 +568,15 @@ bsStyle -> variant
 
 * seeing that react-bootstrap has its own toast component may switch to that instead
 * the full accordion is on top, open or closed, maybe it has a position that's taking precendent
+
+* doesn't matter which toast it is accordion is always on top
+
+##### 12/29
+* using the bootstrap react toast had the same issue, Accordion for whatever reason is always on top...
+* Toast is at the same level of nesting as the accordion and the issue list
+    * it displays over the list but not the accordion...
+
+
+    Accordions provide a way to restrict Card components to only open one at a time. — react-bootstrap
+
+* wonder if there's some kind of conflict with having a collapse show over a collapse 

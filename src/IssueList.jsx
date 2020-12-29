@@ -194,11 +194,9 @@ export default class IssueList extends React.Component {
                 />
                 <Accordion>
                     <Card>
-                        <Card.Header>
-                            <Accordion.Toggle as={Button} variant="link" eventKey="filter-collapse">
-                                Filter
-                            </Accordion.Toggle>
-                        </Card.Header>
+                        <Accordion.Toggle as={Card.Header} variant="link" eventKey="filter-collapse">
+                            Filter
+                        </Accordion.Toggle>
                         <Accordion.Collapse eventKey="filter-collapse">
                             <IssueFilter
                                 setFilter={this.setFilter}
