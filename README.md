@@ -580,3 +580,8 @@ bsStyle -> variant
     Accordions provide a way to restrict Card components to only open one at a time. — react-bootstrap
 
 * wonder if there's some kind of conflict with having a collapse show over a collapse 
+
+##### 12/30
+* moving on without fixing the toast layiering bit. We can return to this later if we feel the need.
+
+## Chapter 11: Server Rendering

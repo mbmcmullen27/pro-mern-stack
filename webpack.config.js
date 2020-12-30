@@ -6,7 +6,7 @@ module.exports = {
     mode: 'development',
     devtool: 'source-map',
     entry: {
-        app: './src/App.jsx',
+        app: './client/Client.jsx',
     },
     output: {
         filename: '[name].bundle.js',
@@ -31,7 +31,7 @@ module.exports = {
         inline: true,
         historyApiFallback: true,
         proxy: {
-            '/api/*': {
+            '*': {
                 target: 'http://localhost:3000'
             }
         }

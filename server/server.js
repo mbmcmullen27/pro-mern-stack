@@ -7,6 +7,7 @@ import bodyParser from 'body-parser';
 import { MongoClient, ObjectId } from 'mongodb';
 
 import Issue from './issue';
+import renderedPageRouter from './renderedPageRouter.jsx'
 
 SourceMapSupport.install();
 
@@ -145,6 +146,4 @@ app.delete('/api/issues/:id', (req, res) => {
         })
 })
 
-app.get('/*', (req, res) => {
-    res.sendFile(path.resolve('static/index.html'))
-})
+app.use('/', renderedPageRouter)
