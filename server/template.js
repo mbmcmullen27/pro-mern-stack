@@ -1,4 +1,4 @@
-export default function template(body) {
+export default function template(body, initialState) {
     return `<!DOCTYPE HTML>
     <html>
 
@@ -18,6 +18,7 @@ export default function template(body) {
 
     <body>
         <div id="contents">${body}</div>    <!-- this is where our component will appear -->
+        <script>window.__INITIAL_STATE__ = ${JSON.stringify(initialState)};</script>
         <base href="http://localhost:8000/"/>
     </body>
 

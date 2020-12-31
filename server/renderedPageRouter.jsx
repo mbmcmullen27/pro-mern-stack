@@ -10,5 +10,5 @@ const renderedPageRouter = new Router();
 renderedPageRouter.get('*', (req, res) => {
     const initialState = { addressee: 'phone lines' };
     const html = renderToString(<Glub {...initialState}/>); // eslint-disable-line
-    res.send(template(html));
+    res.send(template(html, initialState));
 })

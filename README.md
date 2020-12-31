@@ -585,3 +585,9 @@ bsStyle -> variant
 * moving on without fixing the toast layiering bit. We can return to this later if we feel the need.
 
 ## Chapter 11: Server Rendering
+
+##### 12/31
+* I think we're having problems because we're already using a webpack html template
+* I switched the webpack config to get the template from the server, 
+    * this gives the page the template w/ initial state instead of the index.html template with just the bundles...
+    * I don't think this is right, I think we want one plain html index for the client and the js index template for the server
