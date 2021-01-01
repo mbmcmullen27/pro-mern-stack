@@ -3,7 +3,7 @@ import React from 'react';
 export default class Glub extends React.Component {
     constructor(props) {
         super(props);
-        this.state = { ...this.props }
+        this.state = Object.assign({}, this.props); // eslint-disable-line
     }
 
     componentDidMount() {

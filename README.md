@@ -591,3 +591,17 @@ bsStyle -> variant
 * I switched the webpack config to get the template from the server, 
     * this gives the page the template w/ initial state instead of the index.html template with just the bundles...
     * I don't think this is right, I think we want one plain html index for the client and the js index template for the server
+
+##### 1/1
+* not a problem with the template because we changed the webpack config to point to Client.jsx
+    * src/index.html isn't being used currently and doesn't exist on the books git repo
+* We're observing the fallback behavior described in the book on pg 252
+* errors look like its a problem with the proxying 
+    * adding a publicPath to the dev server in the webpack config makes the bootstrap proxy work
+
+* I think this might all be caused by the express server not starting properly, that's why it defaults to the client code in the browser
+
+> [nodemon] app crashed - waiting for file changes before starting...
+
+###### bingo
+* that was it, fixed it by exporting rederedPagerouter, Express Router.use takes a function and got an object because we didn't export the function correctly in the module. Working now and initial state is displayed. No errors. 

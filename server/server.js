@@ -12,7 +12,7 @@ import renderedPageRouter from './renderedPageRouter.jsx'
 SourceMapSupport.install();
 
 const app = express();
-app.use(express.static('static'));
+app.use(express.static(path.join(__dirname, 'static')));
 app.use(express.static(path.join(__dirname, 'public')));
 
 app.use(bodyParser.json());

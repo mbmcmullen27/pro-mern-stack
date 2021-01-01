@@ -27,12 +27,15 @@ module.exports = {
     devServer: {
         port: 8000,
         contentBase: path.resolve(__dirname, 'static'),
+        publicPath: path.resolve(__dirname, 'static'),
         hot: true,
         inline: true,
         historyApiFallback: true,
         proxy: {
-            '*': {
-                target: 'http://localhost:3000'
+            '**': {
+                target: 'http://[::1]:3000',
+                secure: false,
+                changeOrigin: true
             }
         }
     },

@@ -12,3 +12,5 @@ renderedPageRouter.get('*', (req, res) => {
     const html = renderToString(<Glub {...initialState}/>); // eslint-disable-line
     res.send(template(html, initialState));
 })
+
+export default renderedPageRouter;
