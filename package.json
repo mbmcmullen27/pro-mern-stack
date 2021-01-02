@@ -5,6 +5,8 @@
   "main": "index.js",
   "scripts": {
     "start": "nodemon -w dist dist/server.js",
+    "compile-server": "webpack --config webpack.server-config.js",
+    "watch-server": "webpack --config webpack.server-config.js --watch",
     "compile": "webpack",
     "watch": "webpack serve",
     "start-hook": "nodemon -w server,src server/start_hook.js",

@@ -605,3 +605,6 @@ bsStyle -> variant
 
 ###### bingo
 * that was it, fixed it by exporting rederedPagerouter, Express Router.use takes a function and got an object because we didn't export the function correctly in the module. Working now and initial state is displayed. No errors. 
+
+##### 1/2
+* server bundles, when testing run the webpack watch command and run the server bundle
