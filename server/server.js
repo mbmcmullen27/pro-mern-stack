@@ -1,15 +1,11 @@
-import 'babel-polyfill';
-import SourceMapSupport from 'source-map-support';
 import path from 'path';
 
 import express from 'express';
 import bodyParser from 'body-parser';
-import { MongoClient, ObjectId } from 'mongodb';
+import { ObjectId } from 'mongodb';
 
 import Issue from './issue';
 import renderedPageRouter from './renderedPageRouter.jsx'
-
-SourceMapSupport.install();
 
 const app = express();
 app.use(express.static(path.join(__dirname, 'static')));
@@ -18,13 +14,10 @@ app.use(express.static(path.join(__dirname, 'public')));
 app.use(bodyParser.json());
 
 let db;
-MongoClient.connect('mongodb://localhost:27017', { useUnifiedTopology: true }, (err, client) => {
-    if (err) console.log('ERROR', err);
-    db = client.db('issuetracker');
-    app.listen(3000, () => {
-        console.log('Glub started on port 3000')
-    })
-})
+
+function setDb(newDb) {
+    db = newDb;
+}
 
 app.get('/api/issues', (req, res) => {
     const filter = {};
@@ -147,3 +140,5 @@ app.delete('/api/issues/:id', (req, res) => {
 })
 
 app.use('/', renderedPageRouter)
+
+export { app, setDb }
