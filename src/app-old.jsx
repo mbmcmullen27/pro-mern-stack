@@ -1,11 +1,22 @@
 import React from 'react';
+import ReactDOM from 'react-dom';
 import {
     Navbar, Nav, NavDropdown,
 } from 'react-bootstrap';
 import PropTypes from 'prop-types';
 import { LinkContainer } from 'react-router-bootstrap';
 
+import {
+    BrowserRouter as Router,
+    Redirect, Route, Switch, withRouter
+} from 'react-router-dom';
+
+import IssueList from './IssueList.jsx';
+import IssueEdit from './IssueEdit.jsx';
 import IssueAddNavItem from './IssueAddNavItem.jsx';
+
+const contentNode = document.getElementById('contents');
+const NoMatch = () => <p>Page Not Found... glub...</p>;
 
 const Header = () => (
     <Navbar className="container-fluid">
@@ -50,4 +61,20 @@ App.propTypes = {
     children: PropTypes.object.isRequired, //eslint-disable-line
 }
 
-export default App;
+const RoutedApp = () => (
+    <Router>
+        <App>
+            <Switch>
+                <Route exact path="/issues" component={withRouter(IssueList)} />
+                <Route path="/issues/:id" component={withRouter(IssueEdit)} />
+                <Redirect from="/" to="/issues" />
+                <Route path="*"><NoMatch /></Route>
+            </Switch>
+        </App>
+    </Router>
+)
+ReactDOM.render(<RoutedApp />, contentNode);
+
+if (module.hot) {
+    module.hot.accept();
+}

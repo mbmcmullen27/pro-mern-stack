@@ -4,12 +4,13 @@
   "description": "glub glub",
   "main": "index.js",
   "scripts": {
-    "start": "nodemon -w dist dist/server.js",
+    "start": "node dist/server.bundle.js",
     "compile-server": "webpack --config webpack.server-config.js",
     "watch-server": "webpack --config webpack.server-config.js --watch",
     "compile": "webpack",
     "watch": "webpack serve",
     "start-hook": "nodemon -w server,src server/start_hook.js",
+    "dev-all": "npm run watch & npm run watch-server & npm start",
     "dev-all-hook": "npm run watch & npm run start-hook",
     "lint": "eslint --ext .js,.jsx src server webpack.config.js",
     "test": "echo \"Error: no test specified\" && exit 1"
@@ -26,17 +27,17 @@
     "bootstrap": "^4.5.3",
     "css-loader": "^5.0.1",
     "express": "^4.17.1",
+    "isomorphic-fetch": "^3.0.0",
     "mongodb": "^3.6.3",
     "prop-types": "^15.7.2",
     "react": "^17.0.1",
     "react-bootstrap": "^1.4.0",
     "react-dom": "^17.0.1",
     "react-router": "^5.2.0",
-    "react-router-dom": "^5.2.0",
     "react-router-bootstrap": "^0.25.0",
+    "react-router-dom": "^5.2.0",
     "source-map-support": "^0.5.19",
-    "style-loader": "^2.0.0",
-    "whatwg-fetch": "^3.5.0"
+    "style-loader": "^2.0.0"
   },
   "devDependencies": {
     "@babel/core": "^7.12.3",

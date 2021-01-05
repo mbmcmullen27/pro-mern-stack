@@ -11,18 +11,13 @@ import DateInput from './DateInput.jsx';
 import Toast from './Toast.jsx';
 
 export default class IssueEdit extends React.Component {
-    constructor() {
-        super();
+    constructor(props, context) {
+        super(props, context);
+        const issue = context.initialState.data;
+        issue.created = new Date(issue.created);
+        issue.completionDate = issue.completionDate != null ? new Date(issue.completionDate) : null
         this.state = {
-            issue: {
-                _id: '',
-                title: '',
-                status: '',
-                owner: '',
-                effort: null,
-                completionDate: null,
-                created: ''
-            },
+            issue,
             invalidFields: {},
             showingValidation: false,
 

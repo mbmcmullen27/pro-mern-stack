@@ -608,3 +608,10 @@ bsStyle -> variant
 
 ##### 1/2
 * server bundles, when testing run the webpack watch command and run the server bundle
+
+##### 1/4
+* Using a switch inside of Routes
+* Using new context api instead of legacy version from the book
+* Using Static Router instead of Browser Router
+
+    made some progress, seeing the navbar and the font-awesome and bootstrap libraries get fetched. No styles are applied though and getting errors about children not existing for something. No table list displayed

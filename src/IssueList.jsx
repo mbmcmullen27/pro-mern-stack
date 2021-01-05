@@ -3,7 +3,7 @@ import { Link } from 'react-router-dom';
 import {
     Button, Table, Accordion, Card
 } from 'react-bootstrap';
-import 'whatwg-fetch';
+import 'isomorphic-fetch';
 import PropTypes from 'prop-types';
 
 import IssueAdd from './IssueAdd.jsx'
@@ -68,10 +68,18 @@ IssueTable.propTypes = {
 };
 
 export default class IssueList extends React.Component {
-    constructor() {
-        super();
+    constructor(props, context) {
+        super(props, context);
+        const issues = context.initialState.data.records;
+        issues.forEach((issue) => {
+            issue.created = new Date(issue.created);
+            if (issue.completionDate) {
+                issue.completionDate = new Date(issue.completionDate);
+            }
+        })
+
         this.state = {
-            issues: [],
+            issues,
             toastVisible: false,
             toastMessage: '',
             toastType: 'success'
