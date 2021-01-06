@@ -14,15 +14,10 @@ const routes = [
     '/issues/:id'
 ];
 
-const NoMatch = () => <p>Page Not Found</p>;
+const NoMatch = () => <p>Page Not Glubbed</p>;
 
 renderedPageRouter.get('*', (req, res) => {
-    const match = routes.reduce((acc, route) => (
-        matchPath(req.url, route, ({ exact: true }) || acc, null)))
-    if (!match) {
-        res.status(404).send(renderToString(<NoMatch />));
-        return;
-    }
+    console.log(req.url)
 
     fetch(`http://localhost:3000/api${req.url}`)
         .then((response) => (response.json))

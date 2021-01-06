@@ -615,3 +615,6 @@ bsStyle -> variant
 * Using Static Router instead of Browser Router
 
     made some progress, seeing the navbar and the font-awesome and bootstrap libraries get fetched. No styles are applied though and getting errors about children not existing for something. No table list displayed
+
+##### 1/5 
+* getting somewhere, fussing with the matchPath call and the routes to see what sticks
